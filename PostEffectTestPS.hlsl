@@ -48,6 +48,7 @@ float4 main(VSOutput input) : SV_TARGET
 	float noise = WhiteNoise(input.uv * time) - 0.5;
 	color.rgb += float3(noise, noise, noise);
 	
+
 	return color;
 }
 
