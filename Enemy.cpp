@@ -19,10 +19,10 @@ Enemy::~Enemy()
 void Enemy::Initialize(DirectXCommon* dxCommon, TextureManager* textureManager, UINT texNum)
 {
 	turretObj->Initialize(loader->GetModel(Loader::ModelIndex::TURRET));//戦車の砲塔のオブジェクトの初期化
-	turretObj->SetColor(Vector3(0.0f, 0.0f, 1.0f));
+	turretObj->SetColor(Vector3(0.0f, 0.0f, 0.7f));
 
 	bodyObj->Initialize(loader->GetModel(Loader::ModelIndex::BODY));//戦車の車体のオブジェクトの初期化
-	bodyObj->SetColor(Vector3(0.0f, 0.0f, 1.0f));
+	bodyObj->SetColor(Vector3(0.0f, 0.0f, 0.7f));
 
 	scale = Vector3(0.6f, 0.6f, 0.6f);//オブジェクトのサイズ
 	adjustment = Vector3(0.0f, -0.4f, 0.0f);//位置調整
@@ -110,7 +110,6 @@ void Enemy::Hit()
 				eBullet->GetBullet()[i]->SetLiveFlag(false);
 				eBullet->GetBullet()[i]->SetPosition(position);
 				//プレイヤーの体力を減らす
-				//player->SetHp(player->GetHp() - 1);
 				player->Damage();
 			}
 		}

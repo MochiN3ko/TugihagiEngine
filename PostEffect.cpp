@@ -9,7 +9,7 @@
 
 using namespace DirectX;
 
-const float PostEffect::clearColor[4] = { 0.1f,0.25f, 0.5f,0.0f };
+const float PostEffect::clearColor[4] = { 0.33f,0.34f,0.64f,1.0f };
 
 PostEffect::PostEffect()
 	:Sprite(
@@ -400,16 +400,15 @@ void PostEffect::CreateGraphicsPiepelineState()
 
 void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList)
 {
-
 	/*float* shift;
 	cb.Get()->Map(0, nullptr, (void**)&shift);
 	(*shift) = shiftweight;*/
 	PostEffectData* psd = nullptr;
 	cb.Get()->Map(0, nullptr, (void**)&psd);
-	psd->shift = shift;
-	psd->rgbShiftWeight = rgbshiftweight;
-	psd->time = time_;
-	time_++;
+	psd->shift = shiftWeight;
+	psd->rgbShiftWeight = rgbshiftWeight;
+	psd->time = time;
+	time++;
 
 	// ワールド行列の更新
 	this->matWorld = XMMatrixIdentity();

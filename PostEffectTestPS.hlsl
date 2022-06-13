@@ -9,45 +9,50 @@ float Gaussian(float2 drawUV, float2 pickUV, float sigma)
 	return exp(-(d * d)) / (2 * sigma * sigma);
 }
 
-float WhiteNoise(float2 coord) 
+float WhiteNoise(float2 coord)
 {
 	return frac(sin(dot(coord, float2(8.7819, 3.255))) * 437.645);
 }
 
 float4 main(VSOutput input) : SV_TARGET
 {
-	////
-	float vertNoise = WhiteNoise(float2(floor((input.uv.x) / time) * time, time * 0.1));
-	float horzNoise = WhiteNoise(float2(floor((input.uv.y) / time) * time, time * 0.2));
-	float vertGlitchStrength = vertNoise / time;
-	float horzGlitchStrength = horzNoise / time;
+	float vertNoise = WhiteNoise(float2(floor((input.uv.x) / time) * time, time * 10));
+	float horzNoise = WhiteNoise(float2(floor((input.uv.y) / 30) * 10, time * 10));
+	float vertGlitchStrength = vertNoise / 20;
+	float horzGlitchStrength = horzNoise / 20;
 	vertGlitchStrength = vertGlitchStrength * 2.0 - 1.0;
 	horzGlitchStrength = horzGlitchStrength * 2.0 - 1.0;
-	float V = step(vertNoise, time * 2) * vertGlitchStrength;
-	float H = step(horzNoise, time) * horzGlitchStrength;
+	float V = step(vertNoise, 10 * 2) * vertGlitchStrength;
+	float H = step(horzNoise, 10) * horzGlitchStrength;
 
-	float2 samplePoint = input.uv;
-	float sinv = sin(samplePoint.y * 2 - time * -0.1);
+	//湾曲&ずらし
+	float2 resultUv = input.uv;
+	resultUv -= float2(0.5, 0.5);
+	float distPower = pow(length(resultUv), dist);
+	resultUv *= float2(distPower,distPower);
+	resultUv += float2(0.5 , 0.5);
+
+	float sinv = sin(resultUv.y * 2 - time * 10 * -0.1);
 	float steped = 1 - step(0.99, sinv * sinv);
-	float timeFrac = steped * step(0.8, frac(time));
-	samplePoint.x += timeFrac * (V + H);
+	float timeFrac = steped * step(0.8, frac(time * 100));
+	resultUv.x += timeFrac * (V + H);
 
+	//ノイズ
+	float noise = WhiteNoise(input.uv * time * 100) - 0.6;
 
-	////
-	float2 resurtUV = samplePoint;
-	resurtUV -= float2(0.5, 0.5);
-	float distPower = pow(length(resurtUV), dist);
+	float4 color = tex0.Sample(smp, resultUv);
+	//ノイズ加算
+	color.rgb += float3(noise * 0.5, noise * 0.5, noise * 0.5);
+	//RGBずらし
+	resultUv.x += rgbshift;
 
-	resurtUV *= float2(distPower, distPower);
-	resurtUV += float2(0.5, 0.5);
-
-	float4 color = tex0.Sample(smp, resurtUV);
-	resurtUV.x += rgbshift;
-	color.r = tex0.Sample(smp, resurtUV).r;
-
-	float noise = WhiteNoise(input.uv * time) - 0.5;
-	color.rgb += float3(noise, noise, noise);
-	
+	color.r = tex0.Sample(smp, resultUv).r;
 	return color;
+
+	//ポストエフェクトなし
+	//return tex0.Sample(smp, input.uv);
+
 }
+
+
 

@@ -72,10 +72,14 @@ void PlayScene::Initialize(DirectXCommon* dxCommon, TextureManager* textureManag
 	//カメラのポジションとアングル
 	camera->SetTarget(Vector3(0.0f, 0.0f, 0.0f));//注視点
 	camera->SetEye(Vector3(0.0f, 0.0f, -10.0f));//視点
+
+	ShowCursor(FALSE);
 }
 
 void PlayScene::Update()
 {
+	//カーソルの位置固定
+	SetCursorPos(1280.0f / 2, 720.0f / 2);
 #pragma region プレイヤー関連
 
 	//inputを共通化
@@ -148,6 +152,11 @@ void PlayScene::Update()
 	camera->SetTarget(Vector3(player->GetPlayerTarget().x, player->GetPlayerTarget().y, player->GetPlayerTarget().z));//注視点
 	camera->SetEye(Vector3(player->GetPlayerEye().x, player->GetPlayerEye().y, player->GetPlayerEye().z));//視点
 
+	//エスケープでタイトル
+	if (input->TriggerKey(DIK_ESCAPE))
+	{
+		sceneManager_->SetNextScene(new TitleScene(sceneManager_));
+	}
 	//プレイヤーが死んだらゲームオーバー
 	if (!player->GetLiveFlag())
 	{
@@ -194,7 +203,7 @@ void PlayScene::Draw(DirectXCommon* dxCommon)
 void PlayScene::MapLoad()
 {
 	//マップ読み込み
-	map->Load(mapnum);
+	map->SetNowMap(mapnum);
 
 #pragma region オブジェクトのポジション指定
 

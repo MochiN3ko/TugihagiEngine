@@ -16,7 +16,7 @@ public:
 	HitParticle();
 	~HitParticle();
 	void Initialize(DirectXCommon* dxCommon, TextureManager* textureManager, UINT texNum);
-	void Update(Vector3 p);
+	void Update(const Vector3& p);
 	void Draw(DirectXCommon* dxCommon);
 
 	void SetPosition(Vector3 position) { for (int i = 0; i < object.size(); ++i) { object[i]->SetPosition(Vector3(position.x, position.y, position.z)); } }

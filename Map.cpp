@@ -95,10 +95,6 @@ void Map::Reset()
 
 }
 
-void Map::Load(int map)
-{	
-	nowmap = map;
-}
 
 int Map::GetFloorMax()
 {

@@ -17,9 +17,6 @@
     <Filter Include="マップ">
       <UniqueIdentifier>{c8848f61-2e18-46e2-aa29-79f5bef9de09}</UniqueIdentifier>
     </Filter>
-    <Filter Include="マス">
-      <UniqueIdentifier>{4a1f6e0b-b5ec-4fa0-9a48-c4ac095ed7ff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="パーティクル">
       <UniqueIdentifier>{58dd2097-da81-495d-bbe7-2003a28ab91e}</UniqueIdentifier>
     </Filter>
@@ -29,6 +26,9 @@
     <Filter Include="エンジン">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ベクトル">
+      <UniqueIdentifier>{4a1f6e0b-b5ec-4fa0-9a48-c4ac095ed7ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -111,10 +111,10 @@
       <Filter>マップ</Filter>
     </ClCompile>
     <ClCompile Include="Vector2.cpp">
-      <Filter>マス</Filter>
+      <Filter>ベクトル</Filter>
     </ClCompile>
     <ClCompile Include="Vector3.cpp">
-      <Filter>マス</Filter>
+      <Filter>ベクトル</Filter>
     </ClCompile>
     <ClCompile Include="FireParticle.cpp">
       <Filter>パーティクル</Filter>
@@ -199,10 +199,10 @@
       <Filter>マップ</Filter>
     </ClInclude>
     <ClInclude Include="Vector3.h">
-      <Filter>マス</Filter>
+      <Filter>ベクトル</Filter>
     </ClInclude>
     <ClInclude Include="Vector2.h">
-      <Filter>マス</Filter>
+      <Filter>ベクトル</Filter>
     </ClInclude>
     <ClInclude Include="SmokeParticle.h">
       <Filter>パーティクル</Filter>

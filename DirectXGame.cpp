@@ -29,9 +29,6 @@ void DirectXGame::Update()
 	//基底クラスの更新処理
 	BaseGame::Update();
 
-	//カーソルの位置固定
-	//SetCursorPos(winApp->GetWindowWidth() / 2, winApp->GetWindowHeight() / 2);
-
 	sceneManager->Update();
 
 }

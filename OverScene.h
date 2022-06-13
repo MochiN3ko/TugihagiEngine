@@ -10,7 +10,8 @@ class OverScene :
 {
 private:
 
-    std::unique_ptr<Object3d>object;
+    std::unique_ptr<Object3d>over;
+    std::unique_ptr<Object3d>enter;
 
     float angle;
 
