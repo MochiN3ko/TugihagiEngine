@@ -152,20 +152,20 @@ void PlayScene::Update()
 	camera->SetTarget(Vector3(player->GetPlayerTarget().x, player->GetPlayerTarget().y, player->GetPlayerTarget().z));//注視点
 	camera->SetEye(Vector3(player->GetPlayerEye().x, player->GetPlayerEye().y, player->GetPlayerEye().z));//視点
 
-	//エスケープでタイトル
-	if (input->TriggerKey(DIK_ESCAPE))
-	{
-		sceneManager_->SetNextScene(new TitleScene(sceneManager_));
-	}
 	//プレイヤーが死んだらゲームオーバー
 	if (!player->GetLiveFlag())
 	{
 		sceneManager_->SetNextScene(new OverScene(sceneManager_));
 	}
 	//エネミーが全部死んでいたらクリア
-	if (result)
+	else if (result)
 	{
 		sceneManager_->SetNextScene(new ClearScene(sceneManager_));
+	}
+	//エスケープでタイトル
+	else if (input->TriggerKey(DIK_ESCAPE))
+	{
+		sceneManager_->SetNextScene(new TitleScene(sceneManager_));
 	}
 
 }
