@@ -167,7 +167,6 @@ void PlayScene::Update()
 	{
 		sceneManager_->SetNextScene(new TitleScene(sceneManager_));
 	}
-
 }
 
 void PlayScene::Draw(DirectXCommon* dxCommon)
