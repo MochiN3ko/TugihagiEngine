@@ -11,7 +11,8 @@ EnemyBullet::EnemyBullet(int a)
 
 EnemyBullet::~EnemyBullet()
 {
-	for (int i = 0, size = object.size(); i < size; i++)
+	size_t size_ = object.size();
+	for (int i = 0; i < size_; ++i)
 	{
 		delete object[i];
 	}
@@ -19,9 +20,11 @@ EnemyBullet::~EnemyBullet()
 
 void EnemyBullet::Initialize(DirectXCommon* dxCommon, TextureManager* textureManager, UINT texNum)
 {
-	for (int i = 0, size = object.size(); i < size; i++)
+	size_t size_ = object.size();
+	for (int i = 0; i < size_; ++i)
 	{
 		object[i]->Initialize(dxCommon, textureManager, texNum);//初期化
+		object[i]->GetObj()->SetColor(Vector3(0.0f, 0.0f, 0.7f));
 		object[i]->SetReverseCount(1);//反射回数設定
 	}
 	a = 0;//発射レート用のカウント
@@ -31,9 +34,10 @@ void EnemyBullet::Initialize(DirectXCommon* dxCommon, TextureManager* textureMan
 
 }
 
-void EnemyBullet::Update(Vector3 p, Player* player)
+void EnemyBullet::Update(const Vector3& p, Player* player)
 {
-	for (int i = 0, size = object.size(); i < size; i++)
+	size_t size_ = object.size();
+	for (int i = 0; i < size_; ++i)
 	{
 		if (!object[i]->GetLiveFlag())
 		{
@@ -82,7 +86,8 @@ void EnemyBullet::Update(Vector3 p, Player* player)
 
 void EnemyBullet::Draw(DirectXCommon* dxCommon)
 {
-	for (int i = 0, size = object.size(); i < size; i++)
+	size_t size_ = object.size();
+	for (int i = 0; i < size_; ++i)
 	{
 		object[i]->Draw(dxCommon);//描画処理
 	}
@@ -90,7 +95,8 @@ void EnemyBullet::Draw(DirectXCommon* dxCommon)
 
 void EnemyBullet::Reset()
 {
-	for (int i = 0, size = object.size(); i < size; i++)
+	size_t size_ = object.size();
+	for (int i = 0; i < size_; ++i)
 	{
 		object[i]->SetLiveFlag(false);//フラグリセット
 	}

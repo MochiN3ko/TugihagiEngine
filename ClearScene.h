@@ -9,7 +9,8 @@ class ClearScene :
     public BaseScene
 {
 private:
-    std::unique_ptr<Object3d>object;
+    std::unique_ptr<Object3d>clear;
+    std::unique_ptr<Object3d>enter;
 
     float angle;
 

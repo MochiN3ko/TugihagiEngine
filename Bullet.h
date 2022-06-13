@@ -37,6 +37,9 @@ public:
 	Vector3 GetBehindPoint() { return behindPoint; }
 	float GetPointSize() { return pointSize; }
 	int GetReverseCount() { return reverseCount; }
+
+	Object3d* GetObj() { return object.get(); }
+	SmokeParticle* GetSmoke() { return smokeParticle.get(); }
 	//Setter
 	void SetReverseCount(int count) { reverseCount = count; }
 };

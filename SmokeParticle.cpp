@@ -18,8 +18,8 @@ SmokeParticle::~SmokeParticle()
 
 void SmokeParticle::Initialize(DirectXCommon* dxCommon, TextureManager* textureManager, UINT texNum)
 {
-	oSize = object.size();
-	for (int i = 0; i < oSize; ++i)
+	size_t size = object.size();
+	for (int i = 0; i < size; ++i)
 	{
 		object[i]->Initialize(dxCommon, textureManager, texNum);
 		//サイズをランダムで設定
@@ -27,20 +27,21 @@ void SmokeParticle::Initialize(DirectXCommon* dxCommon, TextureManager* textureM
 		object[i]->SetScale(Vector3(rs / 10, rs / 10, rs / 10));
 	}
 	a = 0;
-	spawn = false;
+	red = false;
 }
 
-void SmokeParticle::Update(Vector3 p)
+void SmokeParticle::Update(const Vector3& p)
 {
-	for (int i = 0; i < oSize; ++i)
+	size_t size = object.size();
+	for (int i = 0; i < size; ++i)
 	{
 		object[i]->Update();
 		if (object[i]->GetLiveFlag())
 		{
 			//カラーの移り変わり
-			if (spawn)
+			if (red)
 			{
-				object[i]->SetColor(Vector3(1,object[i]->GetTime() / 15.0f, 0));
+				object[i]->SetColor(Vector3(1, object[i]->GetTime() / 15.0f, 0));
 				object[i]->SetScale(object[i]->GetScale() - Vector3(0.1f, 0.1f, 0.1f));
 			}
 			else

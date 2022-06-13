@@ -42,7 +42,7 @@ public:
 
 	void Initialize();
 	void Reset();
-	void Load(int map);
+	void SetNowMap(int map) { nowmap = map; }
 
 	//Getter
 	Vector3 GetPlayerPosition() { return player[nowmap]; }

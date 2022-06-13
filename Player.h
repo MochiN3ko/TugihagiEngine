@@ -23,7 +23,7 @@ private:
 	std::unique_ptr<Object3d>bodyObj;//戦車の車体のオブジェクト
 
 	std::unique_ptr<NormalBullet>nBullet;//プレイヤーの普通の弾
-	std::unique_ptr<FireParticle>fireParticle;//撃った際のパーティクル
+	//std::unique_ptr<FireParticle>fireParticle;//撃った際のパーティクル
 	std::unique_ptr<Laser>laser;//補助線
 	
 	static bool isInput;
@@ -36,8 +36,8 @@ private:
 	float distanceY;
 	float distanceZ;
 
-	int hp;//体力
-	float speed;//弾の速度
+	int hp = 0;//体力
+	float speed = 0.0f;//弾の速度
 
 	float angle = 0.0f;
 	

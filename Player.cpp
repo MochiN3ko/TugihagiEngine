@@ -10,7 +10,7 @@ Player::Player()
 	turretObj = std::make_unique<Object3d>();
 	bodyObj = std::make_unique<Object3d>();
 	nBullet = std::make_unique<NormalBullet>(20);
-	fireParticle = std::make_unique<FireParticle>();
+	//fireParticle = std::make_unique<FireParticle>();
 	laser = std::make_unique<Laser>();
 }
 
@@ -22,8 +22,10 @@ Player::~Player()
 void Player::Initialize(DirectXCommon* dxCommon, TextureManager* textureManager, UINT texNum)
 {
 	turretObj->Initialize(loader->GetModel(Loader::ModelIndex::TURRET));
+	turretObj->SetColor(Vector3(0.7f,0.13f,0.13f));
 
 	bodyObj->Initialize(loader->GetModel(Loader::ModelIndex::BODY));
+	bodyObj->SetColor(Vector3(0.7f, 0.13f, 0.13f));
 
 	position = Vector3(0.0f, 0.0f, -20.0f);
 
@@ -55,7 +57,7 @@ void Player::Initialize(DirectXCommon* dxCommon, TextureManager* textureManager,
 	//弾
 	nBullet->Initialize(dxCommon, textureManager, texNum);//弾の初期化
 
-	fireParticle->Initialize(dxCommon, textureManager, texNum);
+	//fireParticle->Initialize(dxCommon, textureManager, texNum);
 
 	laser->Initialize(dxCommon, textureManager, texNum);//補助線の初期化
 	laser->SetParent(turretObj.get());//プレイヤーオブジェクトを補助線オブジェクトの親にする
@@ -101,7 +103,7 @@ void Player::Draw(DirectXCommon* dxCommon)
 			}
 		}
 		nBullet->Draw(dxCommon);//弾
-		fireParticle->Draw(dxCommon);//発射時のパーティクル
+		//fireParticle->Draw(dxCommon);//発射時のパーティクル
 	}
 }
 
@@ -137,7 +139,7 @@ void Player::Move()
 			vel = Vector3(direction.x * 0.125f, 0.0f, direction.z * 0.125f);//ノックバック用のvelocity
 			recoil = Vector3(direction.x * 0.01f, 0.0f, direction.z * 0.01f);
 			knockBack = true;
-			fireParticle->SetSpawnFlag(true);
+			//fireParticle->SetSpawnFlag(true);
 		}
 	}
 
@@ -173,7 +175,7 @@ void Player::Move()
 
 	nBullet->Update(position, direction * speed);//弾の更新処理
 
-	fireParticle->Update(position);//発射した際のパーティクルの更新処理
+	//fireParticle->Update(position);//発射した際のパーティクルの更新処理
 
 	laser->Update();//補助線の更新処理
 

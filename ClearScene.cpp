@@ -3,7 +3,8 @@
 ClearScene::ClearScene(SceneManager* sceneManager)
 	:BaseScene(sceneManager)
 {
-	object = std::make_unique<Object3d>();
+	clear = std::make_unique<Object3d>();
+	enter = std::make_unique<Object3d>();
 }
 
 ClearScene::~ClearScene()
@@ -15,15 +16,20 @@ void ClearScene::Initialize(DirectXCommon* dxCommon, TextureManager* textureMana
 	//初期設定
 	BaseScene::Initialize(dxCommon, textureManager, input, camera);
 
-	object->Initialize(loader->GetModel(Loader::ModelIndex::CLEAR));
-	object->SetColor(Vector3(1.0f, 1.0f, 0.0f));
+	clear->Initialize(loader->GetModel(Loader::ModelIndex::CLEAR));
+	clear->SetColor(Vector3(1.0f, 0.84f, 0.0f));
 
-	position = Vector3(0.0f, 0.0f, 50.0f);
+	enter->Initialize(loader->GetModel(Loader::ModelIndex::ENTER));
+	enter->SetColor(Vector3(1.0f, 0.84f, 0.0f));
+
+	position = Vector3(0.0f, -7.0f, 50.0f);
 	scale = Vector3(30.0f, 30.0f, 30.0f);
 
 	//カメラのポジションとアングル
 	camera->SetTarget(Vector3(0, 0, 0));//注視点
 	camera->SetEye(Vector3(0, 0, -10));//視点
+
+	ShowCursor(TRUE);
 }
 
 void ClearScene::Update()
@@ -43,10 +49,15 @@ void ClearScene::Update()
 		rotation = Vector3::Zero;
 	}
 
-	object->SetPosition(position);
-	object->SetRotation(rotation);
-	object->SetScale(scale);
-	object->Update();
+	clear->SetPosition(position);
+	clear->SetRotation(rotation);
+	clear->SetScale(scale);
+	clear->Update();
+
+	enter->SetPosition(Vector3(0, -15, 30));
+	enter->SetRotation(Vector3::Zero);
+	enter->SetScale(Vector3(5, 5, 5));
+	enter->Update();
 
 	if (input->TriggerKey(DIK_RETURN))
 	{
@@ -57,5 +68,7 @@ void ClearScene::Update()
 
 void ClearScene::Draw(DirectXCommon* dxCommon)
 {
-	object->Draw(dxCommon->GetCommandList());
+	clear->Draw(dxCommon->GetCommandList());
+	enter->Draw(dxCommon->GetCommandList());
+
 }

@@ -8,7 +8,7 @@ Loader::Loader(TextureManager* textureManager)
     AddModel(ModelIndex::MISSILE, "missile");
     AddModel(ModelIndex::LASER, "laser");
     AddModel(ModelIndex::WALL, "block1");
-    AddModel(ModelIndex::CUBE, "block1");
+    AddModel(ModelIndex::CUBE, "cube");
     AddModel(ModelIndex::TANKTANK, "tanktank");
     AddModel(ModelIndex::TITLE, "title");
     AddModel(ModelIndex::CLEAR, "clear");
@@ -38,12 +38,12 @@ void Loader::AddModel(const ModelIndex& m, std::string filename)
 
 void Loader::Initialize(DirectXCommon* dxCommon, TextureManager* textureManager)
 {
-    model[static_cast<int>(ModelIndex::TURRET)]->Initialize(dxCommon, textureManager, 1);
-    model[static_cast<int>(ModelIndex::BODY)]->Initialize(dxCommon, textureManager, 1);
-    model[static_cast<int>(ModelIndex::MISSILE)]->Initialize(dxCommon, textureManager, 1);
-    model[static_cast<int>(ModelIndex::LASER)]->Initialize(dxCommon, textureManager, 1);
+    model[static_cast<int>(ModelIndex::TURRET)]->Initialize(dxCommon, textureManager, 3);
+    model[static_cast<int>(ModelIndex::BODY)]->Initialize(dxCommon, textureManager, 3);
+    model[static_cast<int>(ModelIndex::MISSILE)]->Initialize(dxCommon, textureManager, 3);
+    model[static_cast<int>(ModelIndex::LASER)]->Initialize(dxCommon, textureManager, 3);
     model[static_cast<int>(ModelIndex::WALL)]->Initialize(dxCommon, textureManager, 4);
-    model[static_cast<int>(ModelIndex::CUBE)]->Initialize(dxCommon, textureManager, 3);
+    model[static_cast<int>(ModelIndex::CUBE)]->Initialize(dxCommon, textureManager, 1);
     model[static_cast<int>(ModelIndex::TANKTANK)]->Initialize(dxCommon, textureManager, 3);
     model[static_cast<int>(ModelIndex::TITLE)]->Initialize(dxCommon, textureManager, 3);
     model[static_cast<int>(ModelIndex::CLEAR)]->Initialize(dxCommon, textureManager, 3);

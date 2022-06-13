@@ -3,7 +3,8 @@
 OverScene::OverScene(SceneManager* sceneManager)
 	:BaseScene(sceneManager)
 {
-	object = std::make_unique<Object3d>();
+	over = std::make_unique<Object3d>();
+	enter = std::make_unique<Object3d>();
 }
 
 OverScene::~OverScene()
@@ -15,10 +16,13 @@ void OverScene::Initialize(DirectXCommon* dxCommon, TextureManager* textureManag
 	//初期設定
 	BaseScene::Initialize(dxCommon, textureManager, input, camera);
 
-	object->Initialize(loader->GetModel(Loader::ModelIndex::OVER));
-	object->SetColor(Vector3(1.0f, 1.0f, 0.0f));
+	over->Initialize(loader->GetModel(Loader::ModelIndex::OVER));
+	over->SetColor(Vector3(0.8f, 0.15f, 0.15f));
 
-	position = Vector3(0.0f, 0.0f, 50.0f);
+	enter->Initialize(loader->GetModel(Loader::ModelIndex::ENTER));
+	enter->SetColor(Vector3(0.8f, 0.15f, 0.15f));
+
+	position = Vector3(0.0f, -7.0f, 50.0f);
 	scale = Vector3(10.0f, 10.0f, 10.0f);
 
 	angle = 0.0f;
@@ -26,15 +30,28 @@ void OverScene::Initialize(DirectXCommon* dxCommon, TextureManager* textureManag
 	//カメラのポジションとアングル
 	camera->SetTarget(Vector3(0, 0, 0));//注視点
 	camera->SetEye(Vector3(0, 0, -10));//視点
+
+	ShowCursor(TRUE);
 }
 
 void OverScene::Update()
 {
+	//タイトル
+	//ホバリングの幅
+	float range = 0.1f;
+	//ホバリングの速さ
+	angle += 0.042f;
+	scale += Vector3(sin(angle) * range, sin(angle) * range, sin(angle) * range);
 
-	object->SetPosition(position);
-	object->SetRotation(rotation);
-	object->SetScale(scale);
-	object->Update();
+	over->SetPosition(position);
+	over->SetRotation(rotation);
+	over->SetScale(scale);
+	over->Update();
+
+	enter->SetPosition(Vector3(0.0f, -15.0f, 30.0f));
+	enter->SetRotation(Vector3::Zero);
+	enter->SetScale(Vector3(5.0f, 5.0f, 5.0f));
+	enter->Update();
 
 	if (input->TriggerKey(DIK_RETURN))
 	{
@@ -45,5 +62,6 @@ void OverScene::Update()
 
 void OverScene::Draw(DirectXCommon* dxCommon)
 {
-	object->Draw(dxCommon->GetCommandList());
+	over->Draw(dxCommon->GetCommandList());
+	enter->Draw(dxCommon->GetCommandList());
 }

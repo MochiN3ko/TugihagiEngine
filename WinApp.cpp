@@ -22,7 +22,7 @@ void WinApp::Initialize()
 {
 	wndClass.cbSize = sizeof(WNDCLASSEX);
 	wndClass.lpfnWndProc = (WNDPROC)WindowProc;//ウィンドウプロシージャを設定
-	wndClass.lpszClassName = L"DirectXGame";//ウィンドウクラス名
+	wndClass.lpszClassName = L"TankTank";//ウィンドウクラス名
 	wndClass.hInstance = GetModuleHandle(nullptr);//ウィンドウハンドル
 	wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);//カーソル指定
 	//ウィンドウクラスをOSに登録
@@ -32,7 +32,7 @@ void WinApp::Initialize()
 	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);//自動でサイズ補正
 	//ウィンドウオブジェクトの生成
 	hwnd = CreateWindow(wndClass.lpszClassName,//クラス名
-		L"DirectX",//タイトルバーの文字
+		L"TankTank",//タイトルバーの文字
 		WS_OVERLAPPEDWINDOW,//標準的なウィンドウスタイル
 		CW_USEDEFAULT,//表示X 座標(OS に任せる)
 		CW_USEDEFAULT,//表示Y 座標(OS に任せる)
@@ -44,8 +44,7 @@ void WinApp::Initialize()
 		nullptr);//オプション
 		//ウィンドウ表示
 		ShowWindow(hwnd, SW_SHOW);
-	// マウスカーソルの非表示
-	//ShowCursor(FALSE);
+	
 }
 
 bool WinApp::Update()

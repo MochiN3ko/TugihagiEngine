@@ -3,6 +3,7 @@
 #include"SceneManager.h"
 #include"Object3d.h"
 #include"Model.h"
+#include<vector>
 
 //タイトルシーン
 class TitleScene :
@@ -12,6 +13,12 @@ private:
 
     std::unique_ptr<Object3d>title;
     std::unique_ptr<Object3d>enter;
+
+    std::unique_ptr<Object3d>turret;
+    std::unique_ptr<Object3d>body;
+
+    std::unique_ptr<Object3d>turret2;
+    std::unique_ptr<Object3d>body2;
 
     float angle;
 

@@ -18,13 +18,14 @@ HitParticle::~HitParticle()
 
 void HitParticle::Initialize(DirectXCommon* dxCommon, TextureManager* textureManager, UINT texNum)
 {
-	for (int i = 0; i < object.size(); i++)
+	size_t size = object.size();
+	for (int i = 0; i < size; ++i)
 	{
 		object[i]->Initialize(dxCommon, textureManager, texNum);
 		//サイズをランダムで設定
 		float rs = rand() % 10 + 5;
 		object[i]->SetScale(Vector3(rs / 15, rs / 15, rs / 15));
-		object[i]->SetRotation(Vector3(0,0,10*i));
+		object[i]->SetRotation(Vector3(0.0f, 0.0f, 10.0f * i));
 
 		object[i]->SetLiveFlag(false);
 	}
@@ -32,14 +33,15 @@ void HitParticle::Initialize(DirectXCommon* dxCommon, TextureManager* textureMan
 	spawn = false;
 }
 
-void HitParticle::Update(Vector3 p)
+void HitParticle::Update(const Vector3& p)
 {
-	for (int i = 0; i < object.size(); i++)
+	size_t size = object.size();
+	for (int i = 0; i < size; ++i)
 	{
 		object[i]->Update();
 		if (object[i]->GetLiveFlag())
 		{
-			object[i]->SetColor(Vector3(object[i]->GetTime() / 25.0f, 0,0));
+			object[i]->SetColor(Vector3(0.0f, 0.0f, object[i]->GetTime() / 5.0f));
 			object[i]->SetVelocity(object[i]->GetVelocity() * 0.8f);//速度を減速
 		}
 		else
@@ -48,8 +50,8 @@ void HitParticle::Update(Vector3 p)
 			float rndx = rand() % 20 - 10;
 			float rndy = rand() % 20 - 10;
 			float rndz = rand() % 20 - 10;
-			object[i]->SetPosition(p+ Vector3(rndx / 50, rndy / 50, rndz / 50));
-			object[i]->SetVelocity(Vector3(rndx / 30, rndy/30 , rndz / 30));
+			object[i]->SetPosition(p + Vector3(rndx / 50, rndy / 50, rndz / 50));
+			object[i]->SetVelocity(Vector3(rndx / 30, rndy / 30, rndz / 30));
 		}
 		if (object[i]->GetTime() > 20)
 		{

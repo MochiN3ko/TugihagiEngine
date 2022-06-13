@@ -60,9 +60,9 @@ private:
     static const float clearColor[4];
 
     //float shiftweight = 0.0f;
-    float shift = 0.5f;
-    float rgbshiftweight = 0.005f;
-    float time_ = 0.0f;
+    float shiftWeight = 0.4f;
+    float rgbshiftWeight = 0.005f;
+    float time = 0.0f;
 
 };
 

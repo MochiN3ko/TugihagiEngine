@@ -24,6 +24,8 @@ void NormalBullet::Initialize(DirectXCommon* dxCommon, TextureManager* textureMa
 	for (int i = 0; i < oSize; ++i)
 	{
 		object[i]->Initialize(dxCommon, textureManager, texNum);//‰Šú‰»
+		object[i]->GetObj()->SetColor(Vector3(0.7f, 0.13f, 0.13f));
+		object[i]->GetSmoke()->SetRedFlag(true);
 		object[i]->SetReverseCount(2);//”½Ë‚Å‚«‚é‰ñ”
 	}
 	bulletCount = 0;
