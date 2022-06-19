@@ -47,14 +47,14 @@ DirectX::XMVECTOR Vector3::ConvertXMVECTOR()
 	return DirectX::XMLoadFloat3(this);
 }
 
-Vector3 Vector3::Lerp(const Vector3 start, const Vector3 end, const float time)
+Vector3 Vector3::Lerp(const Vector3& start, const Vector3& end, const float time)
 {
 	Vector3 distance = end - start;
 	Vector3 result = start + (distance * time);
 	return result;
 }
 
-float Vector3::Distance(Vector3 a, Vector3 b)
+float Vector3::Distance(const Vector3& a, const Vector3& b)
 {
 	float x = a.x - b.x;
 	float y = a.y - b.y;

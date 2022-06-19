@@ -12,9 +12,9 @@ struct Vector3 : public DirectX::XMFLOAT3
 	Vector3 Cross(const Vector3& v)const;
 	DirectX::XMVECTOR ConvertXMVECTOR();
 
-	static Vector3 Lerp(const Vector3 a, const Vector3 b, const float time);
+	Vector3 Lerp(const Vector3& a, const Vector3& b, const float time);
 	static const Vector3 Zero;
-	static float Distance(Vector3 a, Vector3 b);
+	float Distance(const Vector3& a, const Vector3& b);
 
 	Vector3 operator+() const;
 	Vector3 operator-() const;

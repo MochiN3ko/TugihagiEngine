@@ -76,97 +76,213 @@ void PlayScene::Initialize(DirectXCommon* dxCommon, TextureManager* textureManag
 	ShowCursor(FALSE);
 }
 
+//void PlayScene::Update()
+//{
+//	//カーソルの位置固定
+//	SetCursorPos(1280.0f / 2, 720.0f / 2);
+//
+//#pragma region プレイヤー関連
+//
+//	//inputを共通化
+//	Player::SetInput(input);
+//	//プレイヤーの更新処理
+//	player->Update();
+//
+//#pragma endregion
+//
+//#pragma region エネミー関連
+//
+//	//プレイヤーを共通化
+//	Enemy::SetPlayer(player.get());
+//	//プレイヤーの弾を共通化
+//	Enemy::SetNormalBullet(player->GetNormalBullet()->GetBullet());
+//	//エネミーのサイズ分繰り返す
+//	eSize = enemies.size();
+//	for (int i = 0; i < eSize; ++i)
+//	{
+//		//エネミーの更新処理
+//		enemies[i]->Update();
+//		//フラグ配列にエネミーのフラグを代入
+//		enemyDead[i] = enemies[i]->GetLiveFlag();
+//	}
+//	//エネミーが死んでいるか走査
+//	bool result = std::all_of(enemyDead.begin(), enemyDead.end(), [](bool flag) { return flag == false; });
+//	
+//#pragma endregion
+//
+//#pragma region マップ関連
+//	//床
+//	//プレイヤーを共通化
+//	Floor::SetPlayer(player.get());
+//	fSize = map->GetFloor().size();
+//	for (int i = 0; i < fSize; ++i)
+//	{
+//		//床の更新処理
+//		floor[i]->Update();
+//	}
+//	//天井
+//	//プレイヤーを共通化
+//	Ceiling::SetPlayer(player.get());
+//	cSize = map->GetCeiling().size();
+//	for (int i = 0; i < cSize; ++i)
+//	{
+//		//天井の更新処理
+//		ceiling[i]->Update();
+//	}
+//	//壁
+//	//プレイヤーを共通化
+//	Wall::SetPlayer(player.get());
+//	//プレイヤーの弾を共通化
+//	Wall::SetNormalBullet(player->GetNormalBullet()->GetBullet());
+//	wSize = map->GetWall().size();
+//	eSize = enemies.size();
+//	for (int i = 0; i < wSize; ++i)
+//	{
+//		//弾の共通化
+//		for (int j = 0; j < eSize; ++j)
+//		{
+//			wall[i]->WallBulletHit(enemies[j]->GetNEnemyBullet()->GetBullet());
+//		}
+//		//壁の更新処理
+//		wall[i]->Update();
+//	}
+//
+//#pragma endregion
+//
+//	//カメラのポジションとアングル
+//	camera->SetTarget(Vector3(player->GetPlayerTarget().x, player->GetPlayerTarget().y, player->GetPlayerTarget().z));//注視点
+//	camera->SetEye(Vector3(player->GetPlayerEye().x, player->GetPlayerEye().y, player->GetPlayerEye().z));//視点
+//
+//	//プレイヤーが死んだらゲームオーバー
+//	if (!player->GetLiveFlag())
+//	{
+//		sceneManager_->SetNextScene(new OverScene(sceneManager_));
+//	}
+//	//エネミーが全部死んでいたらクリア
+//	else if (result)
+//	{
+//		sceneManager_->SetNextScene(new ClearScene(sceneManager_));
+//	}
+//	//エスケープでタイトル
+//	else if (input->TriggerKey(DIK_ESCAPE))
+//	{
+//		sceneManager_->SetNextScene(new TitleScene(sceneManager_));
+//	}
+//}
+
 void PlayScene::Update()
 {
 	//カーソルの位置固定
 	SetCursorPos(1280.0f / 2, 720.0f / 2);
+	if (!pause)
+	{
 #pragma region プレイヤー関連
 
-	//inputを共通化
-	Player::SetInput(input);
-	//プレイヤーの更新処理
-	player->Update();
+		//inputを共通化
+		Player::SetInput(input);
+		//プレイヤーの更新処理
+		player->Update();
 
 #pragma endregion
 
 #pragma region エネミー関連
 
-	//プレイヤーを共通化
-	Enemy::SetPlayer(player.get());
-	//プレイヤーの弾を共通化
-	Enemy::SetNormalBullet(player->GetNormalBullet()->GetBullet());
-	//エネミーのサイズ分繰り返す
-	eSize = enemies.size();
-	for (int i = 0; i < eSize; ++i)
-	{
-		//エネミーの更新処理
-		enemies[i]->Update();
-		//フラグ配列にエネミーのフラグを代入
-		enemyDead[i] = enemies[i]->GetLiveFlag();
-	}
-	//エネミーが死んでいるか走査
-	bool result = std::all_of(enemyDead.begin(), enemyDead.end(), [](bool flag) { return flag == false; });
-	
+		//プレイヤーを共通化
+		Enemy::SetPlayer(player.get());
+		//プレイヤーの弾を共通化
+		Enemy::SetNormalBullet(player->GetNormalBullet()->GetBullet());
+		//エネミーのサイズ分繰り返す
+		eSize = enemies.size();
+		for (int i = 0; i < eSize; ++i)
+		{
+			//エネミーの更新処理
+			enemies[i]->Update();
+			//フラグ配列にエネミーのフラグを代入
+			enemyDead[i] = enemies[i]->GetLiveFlag();
+		}
+		//エネミーが死んでいるか走査
+		bool result = std::all_of(enemyDead.begin(), enemyDead.end(), [](bool flag) { return flag == false; });
+
 #pragma endregion
 
 #pragma region マップ関連
-	//床
-	//プレイヤーを共通化
-	Floor::SetPlayer(player.get());
-	fSize = map->GetFloor().size();
-	for (int i = 0; i < fSize; ++i)
-	{
-		//床の更新処理
-		floor[i]->Update();
-	}
-	//天井
-	//プレイヤーを共通化
-	Ceiling::SetPlayer(player.get());
-	cSize = map->GetCeiling().size();
-	for (int i = 0; i < cSize; ++i)
-	{
-		//天井の更新処理
-		ceiling[i]->Update();
-	}
-	//壁
-	//プレイヤーを共通化
-	Wall::SetPlayer(player.get());
-	//プレイヤーの弾を共通化
-	Wall::SetNormalBullet(player->GetNormalBullet()->GetBullet());
-	wSize = map->GetWall().size();
-	eSize = enemies.size();
-	for (int i = 0; i < wSize; ++i)
-	{
-		//弾の共通化
-		for (int j = 0; j < eSize; ++j)
+		//床
+		//プレイヤーを共通化
+		Floor::SetPlayer(player.get());
+		fSize = map->GetFloor().size();
+		for (int i = 0; i < fSize; ++i)
 		{
-			wall[i]->WallBulletHit(enemies[j]->GetNEnemyBullet()->GetBullet());
+			//床の更新処理
+			floor[i]->Update();
 		}
-		//壁の更新処理
-		wall[i]->Update();
-	}
+		//天井
+		//プレイヤーを共通化
+		Ceiling::SetPlayer(player.get());
+		cSize = map->GetCeiling().size();
+		for (int i = 0; i < cSize; ++i)
+		{
+			//天井の更新処理
+			ceiling[i]->Update();
+		}
+		//壁
+		//プレイヤーを共通化
+		Wall::SetPlayer(player.get());
+		//プレイヤーの弾を共通化
+		Wall::SetNormalBullet(player->GetNormalBullet()->GetBullet());
+		wSize = map->GetWall().size();
+		eSize = enemies.size();
+		for (int i = 0; i < wSize; ++i)
+		{
+			//弾の共通化
+			for (int j = 0; j < eSize; ++j)
+			{
+				wall[i]->WallBulletHit(enemies[j]->GetNEnemyBullet()->GetBullet());
+			}
+			//壁の更新処理
+			wall[i]->Update();
+		}
 
 #pragma endregion
 
-	//カメラのポジションとアングル
-	camera->SetTarget(Vector3(player->GetPlayerTarget().x, player->GetPlayerTarget().y, player->GetPlayerTarget().z));//注視点
-	camera->SetEye(Vector3(player->GetPlayerEye().x, player->GetPlayerEye().y, player->GetPlayerEye().z));//視点
+		//カメラのポジションとアングル
+		camera->SetTarget(Vector3(player->GetPlayerTarget().x, player->GetPlayerTarget().y, player->GetPlayerTarget().z));//注視点
+		camera->SetEye(Vector3(player->GetPlayerEye().x, player->GetPlayerEye().y, player->GetPlayerEye().z));//視点
 
-	//プレイヤーが死んだらゲームオーバー
-	if (!player->GetLiveFlag())
-	{
-		sceneManager_->SetNextScene(new OverScene(sceneManager_));
+		if (input->TriggerKey(DIK_SPACE))
+		{
+			if (!pause)
+			{
+				pause = true;
+			}
+		}
+
+		//プレイヤーが死んだらゲームオーバー
+		if (!player->GetLiveFlag())
+		{
+			sceneManager_->SetNextScene(new OverScene(sceneManager_));
+		}
+		//エネミーが全部死んでいたらクリア
+		else if (result)
+		{
+			sceneManager_->SetNextScene(new ClearScene(sceneManager_));
+		}
+		//エスケープでタイトル
+		else if (input->TriggerKey(DIK_ESCAPE))
+		{
+			sceneManager_->SetNextScene(new TitleScene(sceneManager_));
+		}
 	}
-	//エネミーが全部死んでいたらクリア
-	else if (result)
+	else
 	{
-		sceneManager_->SetNextScene(new ClearScene(sceneManager_));
+		if (input->TriggerKey(DIK_SPACE))
+		{
+			if (pause)
+			{
+				pause = false;
+			}
+		}
 	}
-	//エスケープでタイトル
-	else if (input->TriggerKey(DIK_ESCAPE))
-	{
-		sceneManager_->SetNextScene(new TitleScene(sceneManager_));
-	}
+
 }
 
 void PlayScene::Draw(DirectXCommon* dxCommon)
@@ -209,7 +325,7 @@ void PlayScene::MapLoad()
 	//プレイヤー
 	player->SetPosition(map->GetPlayerPosition());
 	player->SetLiveFlag(true);
-	player->SetVelocity(Vector3());
+	player->SetVelocity(Vector3::Zero);
 	player->Reset();
 
 	//エネミー

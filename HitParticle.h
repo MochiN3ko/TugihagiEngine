@@ -10,6 +10,7 @@ private:
 	static const int size = 10;
 	std::vector<Particle*> object;
 	bool spawn;
+	bool red;
 	int a;
 
 public:
@@ -22,4 +23,5 @@ public:
 	void SetPosition(Vector3 position) { for (int i = 0; i < object.size(); ++i) { object[i]->SetPosition(Vector3(position.x, position.y, position.z)); } }
 	void SetLiveFlag(bool b) { for (auto& o : object) { o->SetLiveFlag(b); } }
 	void SetSpawnFlag(bool b) { spawn = b; }
+	void SetRedFlag(bool b) { red = b; }
 };

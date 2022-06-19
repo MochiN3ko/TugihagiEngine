@@ -42,3 +42,4 @@ void SceneManager::SetNextScene(BaseScene* nextScene)
 	scene = nextScene;
 	scene->Initialize(dxCommon, textureManager, input, camera);
 }
+

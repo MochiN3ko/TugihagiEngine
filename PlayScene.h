@@ -35,6 +35,8 @@ private:
     size_t cSize = 0;//マップの天井
     size_t wSize = 0;//マップの壁
 
+    bool pause = false;
+
 public:
     PlayScene(SceneManager* sceneManager);
     ~PlayScene();

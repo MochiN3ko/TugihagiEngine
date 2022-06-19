@@ -7,6 +7,7 @@
 #include "NormalBullet.h"
 #include"FireParticle.h"
 #include"SmokeParticle.h"
+#include"HitParticle.h"
 #include"Laser.h"
 
 class Player :
@@ -24,6 +25,7 @@ private:
 
 	std::unique_ptr<NormalBullet>nBullet;//プレイヤーの普通の弾
 	//std::unique_ptr<FireParticle>fireParticle;//撃った際のパーティクル
+	std::unique_ptr<HitParticle>hitParticle;//当たった際のパーティクル
 	std::unique_ptr<Laser>laser;//補助線
 	
 	static bool isInput;

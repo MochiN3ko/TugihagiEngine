@@ -20,6 +20,11 @@ private:
     std::unique_ptr<Object3d>turret2;
     std::unique_ptr<Object3d>body2;
 
+    //オブジェクト用
+    Vector3 position = Vector3::Zero;//座標
+    Vector3 rotation = Vector3::Zero;//回転
+    Vector3 scale = Vector3::Zero;//スケール
+    Vector3 velocity = Vector3::Zero;//加速度
     float angle;
 
 public:

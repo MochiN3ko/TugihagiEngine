@@ -59,7 +59,6 @@ private:
     //画面クリアカラー
     static const float clearColor[4];
 
-    //float shiftweight = 0.0f;
     float shiftWeight = 0.4f;
     float rgbshiftWeight = 0.005f;
     float time = 0.0f;

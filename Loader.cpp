@@ -32,7 +32,7 @@ Loader::~Loader()
 
 void Loader::AddModel(const ModelIndex& m, std::string filename)
 {
-    model.emplace_back(std::make_unique< Model>());
+    model.emplace_back(std::make_unique<Model>());
     model[static_cast<int>(m)]->LoadModel(filename, false);
 }
 

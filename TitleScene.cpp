@@ -11,6 +11,7 @@ TitleScene::TitleScene(SceneManager* sceneManager)
 
 	turret2 = std::make_unique<Object3d>();
 	body2 = std::make_unique<Object3d>();
+
 }
 
 TitleScene::~TitleScene()
@@ -50,6 +51,8 @@ void TitleScene::Initialize(DirectXCommon* dxCommon, TextureManager* textureMana
 	//カメラのポジションとアングル
 	camera->SetTarget(Vector3(0, 0, 0));//注視点
 	camera->SetEye(Vector3(0, 0, -10));//視点
+
+	//ShowCursor(TRUE);
 }
 
 void TitleScene::Update()
@@ -59,7 +62,7 @@ void TitleScene::Update()
 	float range = 0.1f;
 	//ホバリングの速さ
 	angle += 0.06f;
-	position += Vector3(0.0f, sin(angle) * range, 0.0f);
+	position += Vector3(0.0f, sinf(angle) * range, 0.0f);
 	rotation.y++;
 
 	//タイトルオブジェクト

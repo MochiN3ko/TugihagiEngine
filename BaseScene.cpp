@@ -17,6 +17,7 @@ void BaseScene::Initialize(DirectXCommon* dxCommon, TextureManager* textureManag
 	this->textureManager = textureManager;
 	this->input = input;
 	this->camera = camera;
+
 }
 
 

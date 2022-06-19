@@ -28,8 +28,8 @@ void OverScene::Initialize(DirectXCommon* dxCommon, TextureManager* textureManag
 	angle = 0.0f;
 
 	//カメラのポジションとアングル
-	camera->SetTarget(Vector3(0, 0, 0));//注視点
-	camera->SetEye(Vector3(0, 0, -10));//視点
+	camera->SetTarget(Vector3(0.0f, 0.0f, 0.0f));//注視点
+	camera->SetEye(Vector3(0.0f, 0.0f, -10.0f));//視点
 
 	ShowCursor(TRUE);
 }
@@ -41,7 +41,7 @@ void OverScene::Update()
 	float range = 0.1f;
 	//ホバリングの速さ
 	angle += 0.042f;
-	scale += Vector3(sin(angle) * range, sin(angle) * range, sin(angle) * range);
+	scale += Vector3(sinf(angle) * range, sinf(angle) * range, sinf(angle) * range);
 
 	over->SetPosition(position);
 	over->SetRotation(rotation);

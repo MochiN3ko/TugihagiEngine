@@ -24,11 +24,6 @@ protected:
 
 	static Loader* loader;
 
-	Vector3 position = Vector3::Zero;//座標
-	Vector3 rotation = Vector3::Zero;//回転
-	Vector3 scale = Vector3::Zero;//スケール
-	Vector3 velocity = Vector3::Zero;//加速度
-
 public:
 
 	BaseScene(SceneManager* sceneManager);
@@ -40,7 +35,7 @@ public:
 
 	virtual void Draw(DirectXCommon* dxCommon) = 0;
 
-	static void SetModelLoad(Loader* l) { loader = l; }
+	static void SetModelLoad(Loader* loader_) { loader = loader_; }
 
 };
 

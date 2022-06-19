@@ -11,6 +11,7 @@ Player::Player()
 	bodyObj = std::make_unique<Object3d>();
 	nBullet = std::make_unique<NormalBullet>(20);
 	//fireParticle = std::make_unique<FireParticle>();
+	hitParticle = std::make_unique<HitParticle>();
 	laser = std::make_unique<Laser>();
 }
 
@@ -58,6 +59,8 @@ void Player::Initialize(DirectXCommon* dxCommon, TextureManager* textureManager,
 	nBullet->Initialize(dxCommon, textureManager, texNum);//弾の初期化
 
 	//fireParticle->Initialize(dxCommon, textureManager, texNum);
+	hitParticle->Initialize(dxCommon, textureManager, texNum);//当たった際のパーティクルの初期化
+	hitParticle->SetRedFlag(true);
 
 	laser->Initialize(dxCommon, textureManager, texNum);//補助線の初期化
 	laser->SetParent(turretObj.get());//プレイヤーオブジェクトを補助線オブジェクトの親にする
@@ -103,6 +106,7 @@ void Player::Draw(DirectXCommon* dxCommon)
 			}
 		}
 		nBullet->Draw(dxCommon);//弾
+		hitParticle->Draw(dxCommon);
 		//fireParticle->Draw(dxCommon);//発射時のパーティクル
 	}
 }
@@ -175,6 +179,7 @@ void Player::Move()
 
 	nBullet->Update(position, direction * speed);//弾の更新処理
 
+	hitParticle->Update(position);
 	//fireParticle->Update(position);//発射した際のパーティクルの更新処理
 
 	laser->Update();//補助線の更新処理
@@ -227,6 +232,7 @@ void Player::Damage()
 	if (normal > invincible)
 	{
 		hp--;
+		hitParticle->SetSpawnFlag(true);
 		normal = 0;
 	}
 }

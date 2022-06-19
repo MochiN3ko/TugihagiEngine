@@ -23,14 +23,15 @@ void HitParticle::Initialize(DirectXCommon* dxCommon, TextureManager* textureMan
 	{
 		object[i]->Initialize(dxCommon, textureManager, texNum);
 		//サイズをランダムで設定
-		float rs = rand() % 10 + 5;
-		object[i]->SetScale(Vector3(rs / 15, rs / 15, rs / 15));
+		float rs = rand() % 5 + 5;
+		object[i]->SetScale(Vector3(rs / 20, rs / 20, rs / 20));
 		object[i]->SetRotation(Vector3(0.0f, 0.0f, 10.0f * i));
 
 		object[i]->SetLiveFlag(false);
 	}
 	a = 0;
 	spawn = false;
+	red = false;
 }
 
 void HitParticle::Update(const Vector3& p)
@@ -41,7 +42,15 @@ void HitParticle::Update(const Vector3& p)
 		object[i]->Update();
 		if (object[i]->GetLiveFlag())
 		{
-			object[i]->SetColor(Vector3(0.0f, 0.0f, object[i]->GetTime() / 5.0f));
+			//カラーの移り変わり
+			if (red)
+			{
+				object[i]->SetColor(Vector3(0.7f, 0.13f, 0.13f));
+			}
+			else
+			{
+				object[i]->SetColor(Vector3(0.0f, 0.0f, object[i]->GetTime() / 5.0f));
+			}
 			object[i]->SetVelocity(object[i]->GetVelocity() * 0.8f);//速度を減速
 		}
 		else
