@@ -25,6 +25,8 @@ private:
    
     //ƒV[ƒ“
     std::unique_ptr<SceneManager>sceneManager;
+
+    Sprite* sprite = nullptr;
    
 };
 

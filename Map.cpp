@@ -5,12 +5,8 @@
 
 void Map::Initialize()
 {
-	chipsize = 3;
-	nowmap = 0;
+	chipsize = 3.0f;
 	position = Vector3(-13.0f, 0.0f, 7.0f);
-
-	p = 3;//プレイヤー
-	n = 4;//動かないエネミー
 
 #pragma region ステージデータ
 
@@ -43,11 +39,11 @@ void Map::Initialize()
 
 #pragma endregion
 
-	for (int i = 0; i < MAP_COUNT; i++)
+	for (int i = 0; i < MAP_COUNT; ++i)
 	{
-		for (int z = 0; z < MAP_SIZE_Z; z++)
+		for (int z = 0; z < MAP_SIZE_Z; ++z)
 		{
-			for (int x = 0; x < MAP_SIZE_X; x++)
+			for (int x = 0; x < MAP_SIZE_X; ++x)
 			{
 				//何もなし
 				if (mapchip[i][z][x] == NOTHING)

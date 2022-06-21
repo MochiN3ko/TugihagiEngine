@@ -197,22 +197,22 @@ void Object3d::StaticInitialize(DirectXCommon* dxCommon,Camera* camera)
 	
 	common->camera = camera;
 }
-//void Object3d::RestDescriptorHeap()
-//{
-//	common->descHeapIndex = 0;
-//}
+
 void Object3d::StaticFinalize()
 {
 	delete common;
 	common = nullptr;
 }
+
 Object3d::Object3d()
 {
 }
+
 Object3d::~Object3d()
 {
 	//common->descHeapIndex--;
 }
+
 void Object3d::Initialize(Model* model)
 {
 	this->model = model;
@@ -233,6 +233,7 @@ void Object3d::Initialize(Model* model)
 	UINT descHandleIncrementSize = common->dxCommon->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	
 }
+
 void Object3d::Update()
 {
 	//printf("%i\n", common->descHeapIndex);
@@ -267,7 +268,7 @@ void Object3d::Update()
 	//定数バッファへのデータ転送
 	ConstBufferData* constMap = nullptr;
 	result = constBuff->Map(0, nullptr, (void**)&constMap);
-	constMap->color = XMFLOAT4(color.x, color.y, color.z, 1);//RGBA
+	constMap->color = XMFLOAT4(color.x, color.y, color.z, 1.0f);//RGBA
 	constMap->mat = matWorld * matView * matProjection;//行列の合成
 	constBuff->Unmap(0, nullptr);
 }

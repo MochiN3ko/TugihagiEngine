@@ -2,7 +2,6 @@
 #include "BaseScene.h"
 #include"SceneManager.h"
 #include"Object3d.h"
-#include"Model.h"
 #include<vector>
 
 //タイトルシーン

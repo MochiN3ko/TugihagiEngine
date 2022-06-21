@@ -1,10 +1,9 @@
 #pragma once
 #include "BaseGameObject.h"
-#include "Model.h"
+#include "Object3d.h"
 #include <DirectXMath.h>
 #include<random>
 #include<time.h>
-#include "Object3d.h"
 
 class Particle :
 	public BaseGameObject
@@ -12,7 +11,7 @@ class Particle :
 private:
 	std::unique_ptr<Object3d>object;
 
-	int ptime;			//発射されてからのカウント
+	int ptime = 0;			//発射されてからのカウント
 public:
 	Particle();
 	~Particle();
@@ -20,10 +19,10 @@ public:
 	void Update()override;
 	void Draw(DirectXCommon* dxCommon)override;
 
-	void SetColor(Vector3 c) { object->SetColor(c); }
+	void SetColor(const Vector3& color) { object->SetColor(color); }
 
 	//Getter
-	int GetTime() { return ptime; }
+	const int& GetTime() { return ptime; }
 
 };
 

@@ -1,8 +1,7 @@
 #pragma once
-#include "Model.h"
-#include <DirectXMath.h>
 #include "Object3d.h"
 #include"Bullet.h"
+#include <DirectXMath.h>
 
 class NormalBullet
 {
@@ -18,7 +17,7 @@ private:
 	size_t oSize = 0;
 
 public:
-	NormalBullet(int size);
+	NormalBullet(const int& size);
 	~NormalBullet();
 	void Initialize(DirectXCommon* dxCommon, TextureManager* textureManager, UINT texNum);
 	void Update(const Vector3& position,const Vector3& velocity);

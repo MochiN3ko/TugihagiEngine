@@ -1,7 +1,5 @@
 #pragma once
 #include "BaseGameObject.h"
-#include "Model.h"
-#include <DirectXMath.h>
 #include "Object3d.h"
 #include"Camera.h"
 #include "NormalBullet.h"
@@ -9,6 +7,7 @@
 #include"SmokeParticle.h"
 #include"HitParticle.h"
 #include"Laser.h"
+#include <DirectXMath.h>
 
 class Player :
 	public BaseGameObject
@@ -69,14 +68,14 @@ public:
 	void Reset();
 
 	//Getter
-	Vector3 GetPlayerEye() { return eye; }
-	Vector3 GetPlayerTarget() { return target; }
+	const Vector3& GetPlayerEye() { return eye; }
+	const Vector3& GetPlayerTarget() { return target; }
 	NormalBullet* GetNormalBullet() { return nBullet.get(); }
 	int GetHp() { return hp; }
 	//Setter
 	static void SetInput(Input* i) { input = i; }
-	void SetInputFlag(bool isInput) { this->isInput = isInput; }
-	void SetHp(int i) { hp = i; }
+	void SetInputFlag(const bool& isInput) { this->isInput = isInput; }
+	void SetHp(const int& i) { hp = i; }
 	void Damage();
 };
 

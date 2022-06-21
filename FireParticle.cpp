@@ -18,7 +18,8 @@ FireParticle::~FireParticle()
 
 void FireParticle::Initialize(DirectXCommon* dxCommon, TextureManager* textureManager, UINT texNum)
 {
-	for (int i = 0; i < object.size(); i++)
+	size_t size = object.size();
+	for (int i = 0; i < size; ++i)
 	{
 		object[i]->Initialize(dxCommon, textureManager, texNum);
 		//サイズをランダムで設定
@@ -32,9 +33,10 @@ void FireParticle::Initialize(DirectXCommon* dxCommon, TextureManager* textureMa
 	spawn = false;
 }
 
-void FireParticle::Update(Vector3 p)
+void FireParticle::Update(const Vector3& p)
 {
-	for (int i = 0; i < object.size(); i++)
+	size_t size = object.size();
+	for (int i = 0; i < size; ++i)
 	{
 		object[i]->Update();
 		if (object[i]->GetLiveFlag())

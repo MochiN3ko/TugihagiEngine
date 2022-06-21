@@ -1,17 +1,16 @@
 #pragma once
 #include "BaseGameObject.h"
-#include "Model.h"
-#include <DirectXMath.h>
 #include "Object3d.h"
 #include"Player.h"
+#include <DirectXMath.h>
 
 class Ceiling :
 	public BaseGameObject
 {
 private:
 	std::unique_ptr<Object3d>object;
-	static  Player* player;		//プレイヤー
-	static std::vector<Bullet*> pBullet;
+	static Player* player;//プレイヤー
+	static std::vector<Bullet*>pBullet;
 
 public:
 	Ceiling();

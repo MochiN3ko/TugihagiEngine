@@ -1,6 +1,6 @@
 #include "EnemyBullet.h"
 
-EnemyBullet::EnemyBullet(int a)
+EnemyBullet::EnemyBullet(const int& a)
 {
 	size = a;//ÉTÉCÉY
 	for (int i = 0; i < size; ++i)

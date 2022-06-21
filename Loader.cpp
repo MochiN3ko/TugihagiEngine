@@ -14,6 +14,8 @@ Loader::Loader(TextureManager* textureManager)
     AddModel(ModelIndex::CLEAR, "clear");
     AddModel(ModelIndex::OVER, "over");
     AddModel(ModelIndex::CONTINUE, "continue");
+    AddModel(ModelIndex::RESUME, "resume");
+    AddModel(ModelIndex::RESTART, "restart");
     AddModel(ModelIndex::ENTER, "pushtoenter");
 
     //テクスチャ読み込み
@@ -49,6 +51,8 @@ void Loader::Initialize(DirectXCommon* dxCommon, TextureManager* textureManager)
     model[static_cast<int>(ModelIndex::CLEAR)]->Initialize(dxCommon, textureManager, 3);
     model[static_cast<int>(ModelIndex::OVER)]->Initialize(dxCommon, textureManager, 3);
     model[static_cast<int>(ModelIndex::CONTINUE)]->Initialize(dxCommon, textureManager, 3);
+    model[static_cast<int>(ModelIndex::RESUME)]->Initialize(dxCommon, textureManager, 3);
+    model[static_cast<int>(ModelIndex::RESTART)]->Initialize(dxCommon, textureManager, 3);
     model[static_cast<int>(ModelIndex::ENTER)]->Initialize(dxCommon, textureManager, 3);
 }
 

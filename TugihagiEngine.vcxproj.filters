@@ -30,6 +30,9 @@
     <Filter Include="ベクトル">
       <UniqueIdentifier>{4a1f6e0b-b5ec-4fa0-9a48-c4ac095ed7ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ゲームオブジェクト\ポーズ">
+      <UniqueIdentifier>{345ac660-9678-4324-8ab1-7355c184f729}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseGame.cpp">
@@ -148,6 +151,15 @@
     </ClCompile>
     <ClCompile Include="TitleScene.cpp">
       <Filter>シーン</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseResume.cpp">
+      <Filter>ゲームオブジェクト\ポーズ</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseTitle.cpp">
+      <Filter>ゲームオブジェクト\ポーズ</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseRestart.cpp">
+      <Filter>ゲームオブジェクト\ポーズ</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -281,6 +293,15 @@
     </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>エンジン</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseResume.h">
+      <Filter>ゲームオブジェクト\ポーズ</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseTitle.h">
+      <Filter>ゲームオブジェクト\ポーズ</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseRestart.h">
+      <Filter>ゲームオブジェクト\ポーズ</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

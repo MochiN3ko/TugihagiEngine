@@ -1,26 +1,30 @@
 #pragma once
 #include "BaseGameObject.h"
 #include "Object3d.h"
-#include"Player.h"
 #include <DirectXMath.h>
 
-class Floor :
+class PauseTitle :
 	public BaseGameObject
 {
 private:
+
 	std::unique_ptr<Object3d>object;
-	static Player* player;//プレイヤー
-	static std::vector<Bullet*>pBullet;
+	Vector3 black = { 0.0f, 0.0f, 0.0f };
+	Vector3 red = { 1.0f, 0.0f, 0.0f };
+
+	float range = 0.005f;//オブジェクトが動く幅
+	float angle = 0.0f;//オブジェクトの動く速さ
+	bool move = false;
 
 public:
-	Floor();
-	~Floor();
+	PauseTitle();
+	~PauseTitle();
 	void Initialize(DirectXCommon* dxCommon, TextureManager* textureManager, UINT texNum) override;
 	void Update()override;
 	void Draw(DirectXCommon* dxCommon)override;
-	//Setter
-	static void SetPlayer(Player* p) { player = p; }
-	static void SetNormalBullet(const std::vector<Bullet*>b){ pBullet = b; }
+
+	void SetMoveFlag(const bool& move) { this->move = move; }
 };
+
 
 

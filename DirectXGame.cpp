@@ -19,6 +19,9 @@ void DirectXGame::Initialize()
 	sceneManager = std::make_unique<SceneManager>();
 	sceneManager->Initialize(dxCommon.get(), textureManager.get(), input.get(), camera.get());
 
+	sprite = new Sprite(6, Vector2(0, 0), Vector2(64, 64), {0,0,0,0}, Vector2(0, 0),false,false);
+	sprite->Initialize(6);
+
 	//カメラのポジションとアングル
 	camera->SetTarget(XMFLOAT3(0.0f, 0.0f, 0.0f));//注視点
 	camera->SetEye(XMFLOAT3(0.0f, 0.0f, -10.0f));//視点
@@ -49,6 +52,8 @@ void DirectXGame::Draw()
 	dxCommon->BeginDraw();
 	//ポストエフェクトのフィルターを通して描画
 	postEffect->Draw(dxCommon->GetCommandList());
+
+	sprite->Draw(dxCommon->GetCommandList());
 
 	dxCommon->EndDraw();
 }

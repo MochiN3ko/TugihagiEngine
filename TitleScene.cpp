@@ -11,7 +11,6 @@ TitleScene::TitleScene(SceneManager* sceneManager)
 
 	turret2 = std::make_unique<Object3d>();
 	body2 = std::make_unique<Object3d>();
-
 }
 
 TitleScene::~TitleScene()

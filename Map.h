@@ -12,7 +12,7 @@ class Map
 		FLOORCEILING,
 		PLAYER,
 		NORMALENEMY,
-		SQUAREENEMY
+		SQUAREENEMY,
 	};
 
 private:
@@ -22,31 +22,31 @@ private:
 
 	std::vector<std::vector<int>> mapchip[MAP_COUNT];
 	
-	Vector3 position;
-	float chipsize;//一個分のサイズ（間隔）
-	int nowmap;
+	Vector3 position = Vector3::Zero;
+	float chipsize = 0.0f;//一個分のサイズ（間隔）
+	int nowmap = 0;//現在のマップ番号
 
 	//ゲームオブジェクトの初期位置用
 	Vector3 player[MAP_COUNT];
-	std::vector<Vector3> floor[MAP_COUNT];//床
-	std::vector<Vector3> ceiling[MAP_COUNT];//天井
-	std::vector<Vector3> wall[MAP_COUNT];//壁
-	std::vector<Vector3> normalEnemies[MAP_COUNT];//動かないエネミー
-	std::vector<Vector3> squareEnemies[MAP_COUNT];//四角に動くエネミー
+	std::vector<Vector3>floor[MAP_COUNT];//床
+	std::vector<Vector3>ceiling[MAP_COUNT];//天井
+	std::vector<Vector3>wall[MAP_COUNT];//壁
+	std::vector<Vector3>normalEnemies[MAP_COUNT];//動かないエネミー
+	std::vector<Vector3>squareEnemies[MAP_COUNT];//四角に動くエネミー
 
 	//各オブジェクトの番号変数
-	int p;//プレイヤー
-	int n;//動かないエネミー
+	int p = 3;//プレイヤー
+	int n = 4;//動かないエネミー
 
 public:
 
 	void Initialize();
 	void Reset();
-	void SetNowMap(int map) { nowmap = map; }
+	void SetNowMap(const int& map) { nowmap = map; }
 
 	//Getter
-	Vector3 GetPlayerPosition() { return player[nowmap]; }
-	std::vector<Vector3> GetNEnemy(){ return normalEnemies[nowmap]; }
+	const Vector3& GetPlayerPosition() { return player[nowmap]; }
+	std::vector<Vector3>GetNEnemy(){ return normalEnemies[nowmap]; }
 	std::vector<Vector3> GetFloor(){ return floor[nowmap]; }
 	std::vector<Vector3> GetCeiling(){ return ceiling[nowmap]; }
 	std::vector<Vector3> GetWall(){ return wall[nowmap]; }

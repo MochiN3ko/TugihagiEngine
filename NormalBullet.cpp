@@ -1,6 +1,6 @@
 #include "NormalBullet.h"
 
-NormalBullet::NormalBullet(int size)
+NormalBullet::NormalBullet(const int& size)
 {
 	this->size = size;//’e‚ÌƒTƒCƒY
 	for (int i = 0; i < size; ++i)

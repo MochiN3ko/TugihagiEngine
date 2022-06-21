@@ -28,14 +28,14 @@ public:
 	bool TriggerKey(const int& keyNum);
 
 	//マウス
-	static bool MouseButtonPress(const int& keyNum);
-	static bool MouseButtonTrigger(const int& keyNum);
-	static bool MouseButtonHold(const int& keyNum);
-	static bool MouseButtonRelease(const int& keyNum);
+	bool MouseButtonPress(const int& keyNum);
+	bool MouseButtonTrigger(const int& keyNum);
+	bool MouseButtonHold(const int& keyNum);
+	bool MouseButtonRelease(const int& keyNum);
 
-	static int MouseXMove();
-	static int MouseYMove();
-	static int MouseWheelMove();
+	int MouseXMove();
+	int MouseYMove();
+	int MouseWheelMove();
 
 	//ゲームパッドのボタンの入力状況
 	bool PadButtonPress(const int& keyNum);//押していたら
@@ -83,6 +83,5 @@ private:
 	XINPUT_STATE currentPadState;//現在
 
 	XINPUT_STATE previousPadState;//1フレーム前
-
 };
 

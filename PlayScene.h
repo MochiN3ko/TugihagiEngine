@@ -4,6 +4,9 @@
 
 #include"Player.h"
 #include"Enemy.h"
+#include"PauseResume.h"
+#include"PauseRestart.h"
+#include"PauseTitle.h"
 #include"Floor.h"
 #include"Ceiling.h"
 #include"Wall.h"
@@ -14,6 +17,13 @@ class PlayScene :
     public BaseScene
 {
 private:
+    //ポーズのswitch文に使うenum
+    enum PauseMenu
+    {
+        RESUME,
+        RESTART,
+        TITLE,
+    };
 
     std::unique_ptr<Player> player;//プレイヤー
 
@@ -35,7 +45,12 @@ private:
     size_t cSize = 0;//マップの天井
     size_t wSize = 0;//マップの壁
 
-    bool pause = false;
+    //ポーズ関連
+    std::unique_ptr<PauseResume>pauseResume;//ポーズの再開オブジェクト
+    std::unique_ptr<PauseRestart>pauseRestart;//ポーズのやり直しオブジェクト
+    std::unique_ptr<PauseTitle>pauseTitle;//ポーズのタイトルに戻るオブジェクト
+    bool pause = false;//ポーズのON/OFF切り替え変数
+    int pauseNum = 0;//ポーズメニューの切り替え変数
 
 public:
     PlayScene(SceneManager* sceneManager);

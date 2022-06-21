@@ -1,8 +1,7 @@
 #pragma once
 #include "BaseGameObject.h"
-#include "Model.h"
-#include <DirectXMath.h>
 #include "Object3d.h"
+#include <DirectXMath.h>
 
 class Laser :
 	public BaseGameObject

@@ -1,11 +1,10 @@
 #pragma once
 #include "BaseGameObject.h"
-#include "Model.h"
-#include <DirectXMath.h>
 #include "Object3d.h"
 #include"HitParticle.h"
 #include"EnemyBullet.h"
 #include"Player.h"
+#include <DirectXMath.h>
 class Enemy :
 	public BaseGameObject
 {

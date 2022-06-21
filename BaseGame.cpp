@@ -99,7 +99,7 @@ void BaseGame::FrameRate()
 		//1ƒ~ƒŠ•b
 		DWORD sleepTime = static_cast<DWORD>((1000.0f / MinFrameTime) * count - (endTime.QuadPart - startTime.QuadPart) * 1000.0f / freqTime.QuadPart);
 
-		if (sleepTime < 18 && sleepTime>0)
+		if (sleepTime < 18 && sleepTime > 0)
 		{
 			timeBeginPeriod(1);
 			Sleep(sleepTime);

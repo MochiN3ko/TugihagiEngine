@@ -7,9 +7,9 @@ void Camera::Initialize()
 {
 	const float distance = 20.0f;	//カメラ距離
 
-	eye = { 0, 0, -distance }; // 視点座標
-	target = { 0, 0, 0 }; // 注視点座標
-	up = { 0, 1, 0 }; // 上方向ベクトル
+	eye = { 0.0f, 0.0f, -distance }; // 視点座標
+	target = { 0.0f, 0.0f, 0.0f }; // 注視点座標
+	up = { 0.0f, 1.0f, 0.0f }; // 上方向ベクトル
 
 	UpdateViewMatrix();
 	UpdateProjectionMatrix();

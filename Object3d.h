@@ -98,10 +98,10 @@ public://ƒƒ“ƒoŠÖ”
 	const Vector3& GetScale() { return scale; }
 	const Vector3& GetRotation() { return rotation; }
 	//Setter
-	void SetPosition(Vector3 position) { this->position = position; }
-	void SetScale(Vector3 scale) { this->scale = scale; }
-	void SetRotation(Vector3 rotation) { this->rotation = rotation; }
-	void SetColor(Vector3 color) { this->color = color; }
+	void SetPosition(const Vector3& position) { this->position = position; }
+	void SetScale(const Vector3& scale) { this->scale = scale; }
+	void SetRotation(const Vector3& rotation) { this->rotation = rotation; }
+	void SetColor(const Vector3& color) { this->color = color; }
 	void SetParent(Object3d* parent) { this->parent = parent; }
 
 private:

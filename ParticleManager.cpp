@@ -18,7 +18,8 @@ ParticleManager::~ParticleManager()
 
 void ParticleManager::Initialize(DirectXCommon* dxCommon, TextureManager* textureManager, UINT texNum)
 {
-	for (int i = 0; i < object.size(); i++)
+	oSize = object.size();
+	for (int i = 0; i < oSize; ++i)
 	{
 		object[i]->Initialize(dxCommon, textureManager, texNum);
 		float b = 360 / size * i;
@@ -29,7 +30,8 @@ void ParticleManager::Initialize(DirectXCommon* dxCommon, TextureManager* textur
 
 void ParticleManager::Update()
 {
-	for (int i = 0; i < object.size(); i++)
+	oSize = object.size();
+	for (int i = 0; i < oSize; ++i)
 	{
 		object[i]->Update();
 		//object[i]->SetScale(object[i]->GetScale()-);
@@ -44,15 +46,16 @@ void ParticleManager::Draw(DirectXCommon* dxCommon)
 	}
 }
 
-void ParticleManager::SetPosition(Vector3 position)
+void ParticleManager::SetPosition(const Vector3& position)
 {
-	for (int i = 0; i < object.size(); ++i)
+	oSize = object.size();
+	for (int i = 0; i < oSize; ++i)
 	{
 		object[i]->SetPosition(Vector3(position.x, position.y, position.z));
 	}
 }
 
-void ParticleManager::SetLiveFlag(bool b)
+void ParticleManager::SetLiveFlag(const bool& b)
 {
 	for (auto& o : object)
 	{
@@ -60,12 +63,5 @@ void ParticleManager::SetLiveFlag(bool b)
 	}
 }
 
-//void ParticleManager::SetTarget(Vector3 p)
-//{
-//	for (auto& o : object)
-//	{
-//		o->SetTarget(p);
-//	}
-//}
 
 

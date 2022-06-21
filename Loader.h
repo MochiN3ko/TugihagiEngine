@@ -20,6 +20,8 @@ public:
         CLEAR,
         OVER,
         CONTINUE,
+        RESUME,
+        RESTART,
         ENTER,
     };
 
