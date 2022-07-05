@@ -1,9 +1,10 @@
 #pragma once
 #include "BaseScene.h"
 #include"SceneManager.h"
-
+#include"Object3d.h"
 #include"Player.h"
 #include"Enemy.h"
+#include"BackGroundObject.h"
 #include"PauseResume.h"
 #include"PauseRestart.h"
 #include"PauseTitle.h"
@@ -18,7 +19,7 @@ class PlayScene :
 {
 private:
     //ポーズのswitch文に使うenum
-    enum PauseMenu
+    enum class PauseMenu
     {
         RESUME,
         RESTART,
@@ -51,6 +52,12 @@ private:
     std::unique_ptr<PauseTitle>pauseTitle;//ポーズのタイトルに戻るオブジェクト
     bool pause = false;//ポーズのON/OFF切り替え変数
     int pauseNum = 0;//ポーズメニューの切り替え変数
+
+    bool opening = true;
+    int openingTime = 0;
+    Vector3 lineScale = Vector3::Zero;
+    std::unique_ptr<BackGroundObject>bgTank;
+    std::unique_ptr<Object3d>line;
 
 public:
     PlayScene(SceneManager* sceneManager);

@@ -204,7 +204,7 @@ void PostEffect::Initialize()
 	);
 
 	//パイプライン生成
-	CreateGraphicsPiepelineState();
+	CreateGraphicsPipelineState();
 }
 
 void PostEffect::PreDrawScene(ID3D12GraphicsCommandList* cmdList)
@@ -265,7 +265,7 @@ void PostEffect::PostDrawScene(ID3D12GraphicsCommandList* cmdList)
 	}
 }
 
-void PostEffect::CreateGraphicsPiepelineState()
+void PostEffect::CreateGraphicsPipelineState()
 {
 	HRESULT result = S_FALSE;
 	ComPtr<ID3DBlob> vsBlob; // 頂点シェーダオブジェクト
@@ -395,7 +395,7 @@ void PostEffect::CreateGraphicsPiepelineState()
 
 	gpipeline.pRootSignature = rootSignature.Get();
 	// グラフィックスパイプラインの生成
-	result = GetdxCommon()->GetDevice()->CreateGraphicsPipelineState(&gpipeline, IID_PPV_ARGS(&piepelineState));
+	result = GetdxCommon()->GetDevice()->CreateGraphicsPipelineState(&gpipeline, IID_PPV_ARGS(&pipelineState));
 	assert(SUCCEEDED(result));
 }
 
@@ -425,7 +425,7 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList)
 		this->constBuff->Unmap(0, nullptr);
 	}
 	//パイプラインステートの設定
-	cmdList->SetPipelineState(piepelineState.Get());
+	cmdList->SetPipelineState(pipelineState.Get());
 	//ルートシグネチャの設定
 	cmdList->SetGraphicsRootSignature(rootSignature.Get());
 	//プリミティブ形状を設定

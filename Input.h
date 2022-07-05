@@ -17,30 +17,41 @@ public:
 	Input();
 	~Input();
 
-	void Initialize(HWND hwnd);
+	void Initialize(const HWND& hwnd);
 
 	void Update();
 
 	static void Finalize();
 
-	bool PushKey(const int& keyNum);
+	bool KeyPress(const int& keyNum);
 
-	bool TriggerKey(const int& keyNum);
+	bool KeyTrigger(const int& keyNum);
+
+	bool KeyHold(const int& keyNum);
+
+	bool KeyRelease(const int& keyNum);
 
 	//マウス
 	bool MouseButtonPress(const int& keyNum);
+
 	bool MouseButtonTrigger(const int& keyNum);
+
 	bool MouseButtonHold(const int& keyNum);
+
 	bool MouseButtonRelease(const int& keyNum);
 
 	int MouseXMove();
+
 	int MouseYMove();
+
 	int MouseWheelMove();
 
 	//ゲームパッドのボタンの入力状況
 	bool PadButtonPress(const int& keyNum);//押していたら
 
 	bool PadButtonTrigger(const int& keyNum);//押した瞬間のみ
+
+	bool PadButtonHold(const int& keyNum);//押した瞬間のみ
 
 	bool PadButtonRelease(const int& keyNum);//離した瞬間のみ
 
@@ -68,20 +79,27 @@ public:
 	bool PadRightStickDown();//下
 
 private:
-	//キーボードデバイスの生成
-	IDirectInputDevice8* devkeyboard = nullptr;
-	//全キーの入力状態を取得する
-	BYTE key[256] = {};
-	BYTE key2[256] = {};
+	//DirectInputのデバイス全体管理クラス
+	static IDirectInput8* dinput;
 
-	//マウス
+	//各デバイスごとに管理するクラス
+	static IDirectInputDevice8* devKeyboard;
+
+	static IDirectInputDevice8* devMouse;
+
+	//キー情報を格納する用
+	static BYTE currentKey[256];
+
+	static BYTE previousKey[256];
+
+	//マウス情報を格納する用
 	static DIMOUSESTATE currentMouse;
-	static DIMOUSESTATE prevMouse;
-	static IDirectInputDevice8* devmouse;
 
-	//ゲームパッドの入力情報を格納する
-	XINPUT_STATE currentPadState;//現在
+	static DIMOUSESTATE previousMouse;
 
-	XINPUT_STATE previousPadState;//1フレーム前
+	//ゲームパッドの入力情報を格納する用
+	static XINPUT_STATE currentPadState;
+
+	static XINPUT_STATE previousPadState;
 };
 

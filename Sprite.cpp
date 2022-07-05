@@ -6,11 +6,11 @@
 
 using namespace DirectX;
 
-Sprite::Common* Sprite::common = nullptr;
+std::unique_ptr<Sprite::Common> Sprite::common;
 
 void Sprite::StaticInitialize(DirectXCommon* dxCommon, TextureManager* textureManager)
 {
-	common = new Common;
+	common = std::make_unique<Common>();
 	common->dxCommon = dxCommon;
 	common->textureManager = textureManager;
 
@@ -22,15 +22,6 @@ void Sprite::StaticInitialize(DirectXCommon* dxCommon, TextureManager* textureMa
 		0.0f,WinApp::window_width,
 		WinApp::window_height,0.0f,
 		0.0f, 1.0f);
-}
-
-void Sprite::StaticFinalize()
-{
-	//解放
-	if (common != nullptr) {
-		delete common;
-		common = nullptr;
-	}
 }
 
 void Sprite::SetPiepelineState(ID3D12GraphicsCommandList* cmdList)
@@ -66,11 +57,11 @@ void Sprite::Initialize(UINT texNumber)
 	{
 		D3D12_RESOURCE_DESC resDesc = common->textureManager->GetSpriteTexBuff(texNumber)->GetDesc();
 
-		width = (float)resDesc.Width;
-		height = (float)resDesc.Height;
+		size.x = (float)resDesc.Width;
+		size.y = (float)resDesc.Height;
 
-		tex_width = (float)resDesc.Width;
-		tex_height = (float)resDesc.Height;
+		texSize.x = (float)resDesc.Width;
+		texSize.y = (float)resDesc.Height;
 
 	}
 
@@ -85,13 +76,6 @@ void Sprite::Initialize(UINT texNumber)
 	}
 
 	TransferVertices();
-
-	////バッファへのデータ転送
-	//VertexPosUv* vertMap = nullptr;
-	//result = vertBuff->Map(0, nullptr, (void**)&vertMap);
-	//memcpy(vertMap, vertices, sizeof(vertices));
-	//vertBuff->Unmap(0, nullptr);
-
 
 	//頂点バッファビューの作成
 	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
@@ -124,21 +108,20 @@ void Sprite::Draw(ID3D12GraphicsCommandList* cmdList)
 	//ワールド行列の更新
 	matWorld = XMMatrixIdentity();
 	matWorld *= XMMatrixRotationZ(XMConvertToRadians(rotation));
-	matWorld *= XMMatrixTranslation(position.x, position.y, position.z);
+	matWorld *= XMMatrixTranslation(position.x, position.y, 0.0f);
 	//matWorld*= 
 	//行列の転送
 	ConstBufferData* constMap = nullptr;
-	HRESULT result = constBuff->Map(0, nullptr, (void**)&constMap);
+	constBuff->Map(0, nullptr, (void**)&constMap);
 	constMap->mat = matWorld * common->matProjection;//行列の合成
+	constMap->color = color;
 	constBuff->Unmap(0, nullptr);
-
 
 	//頂点バッファをセット
 	cmdList->IASetVertexBuffers(0, 1, &vbView);
 
 	//定数バッファをセット
 	cmdList->SetGraphicsRootConstantBufferView(0, constBuff->GetGPUVirtualAddress());
-
 
 	//デスクリプタヒープの配列
 	common->textureManager->SetDescripterHeaps(cmdList);
@@ -152,87 +135,102 @@ void Sprite::Draw(ID3D12GraphicsCommandList* cmdList)
 void Sprite::TransferVertices()
 {
 	HRESULT result;
-		//頂点データ
-		VertexPosUv vertices[] = {
-			//x      y      z       u     v
-			{{  0.0f,100.0f,0.0f},{0.0f,1.0f}},//左下
-			{{  0.0f,  0.0f,0.0f},{0.0f,0.0f}},//左上
-			{{100.0f,100.0f,0.0f},{1.0f,1.0f}},//右下
-			{{100.0f,  0.0f,0.0f},{1.0f,0.0f}},//右上
-		};
+	//頂点データ
+	VertexPosUv vertices[4]; /*= {
+		//x      y      z       u     v
+		{{  0.0f,100.0f,0.0f},{0.0f,1.0f}},//左下
+		{{  0.0f,  0.0f,0.0f},{0.0f,0.0f}},//左上
+		{{100.0f,100.0f,0.0f},{1.0f,1.0f}},//右下
+		{{100.0f,  0.0f,0.0f},{1.0f,0.0f}},//右上
+	};*/
 
-		//左右上下座標の計算
-		enum { LB, LT, RB, RT };
+	//左右上下座標の計算
+	enum { LB, LT, RB, RT };
 
-		float left = (0.0f - anchorpoint.x) * width;
-		float right = (1.0f - anchorpoint.x) * width;
-		float top = (0.0f - anchorpoint.y) * height;
-		float botton = (1.0f - anchorpoint.y) * height;
+	float left = (0.0f - anchorpoint.x) * size.x;
+	float right = (1.0f - anchorpoint.x) * size.x;
+	float top = (0.0f - anchorpoint.y) * size.y;
+	float botton = (1.0f - anchorpoint.y) * size.y;
 
-		//反転の反映
-		if (isFlipX)
-		{//左右入れ替え
-			left = -left;
-			right = -right;
-		}
-		if (isFlipY)
-		{//上下入れ替え
-			top = -top;
-			botton = -botton;
-		}
+	//反転の反映
+	if (isFlipX)
+	{//左右入れ替え
+		left = -left;
+		right = -right;
+	}
+	if (isFlipY)
+	{//上下入れ替え
+		top = -top;
+		botton = -botton;
+	}
 
-		//頂点データ配列に座標セット
-		vertices[LB].pos = { left,			botton,			0.0f };	//左下
-		vertices[LT].pos = { left,			top,				0.0f };	//	左上
-		vertices[RB].pos = { right,		 botton,		0.0f };	//右下
-		vertices[RT].pos = { right,		top,				0.0f };	//右上
+	//頂点データ配列に座標セット
+	vertices[LB].pos = { left,botton,0.0f };//左下
+	vertices[LT].pos = { left,top,0.0f };//左上
+	vertices[RB].pos = { right,botton,0.0f };//右下
+	vertices[RT].pos = { right,top,0.0f };//右上
 
-		//テクスチャ情報取得
-		if (common->textureManager->GetSpriteTexBuff(texNumber))
+	//テクスチャ情報取得
+	if (common->textureManager->GetSpriteTexBuff(texNumber))
+	{
+		D3D12_RESOURCE_DESC resDesc = common->textureManager->GetSpriteTexBuff(texNumber)->GetDesc();
+
+		if (texSize.x == 0 && texSize.y == 0)
 		{
-			D3D12_RESOURCE_DESC resDesc = common->textureManager->GetSpriteTexBuff(texNumber)->GetDesc();
-
-			if (tex_width == 0 && tex_height == 0)
-			{
-				tex_width = resDesc.Width;
-				tex_height = resDesc.Height;
-			}
-
-			float tex_left = tex_x / resDesc.Width;
-			float tex_right = (tex_x + tex_width) / resDesc.Width;
-			float tex_top = tex_y / resDesc.Height;
-			float tex_botton = (tex_y + tex_height) / resDesc.Height;
-
-			vertices[LB].uv = { tex_left,tex_botton };//左下
-			vertices[LT].uv = { tex_left,tex_top };//左上
-			vertices[RB].uv = { tex_right,tex_botton };//右下
-			vertices[RT].uv = { tex_right,tex_top };//右上
+			texSize.x = resDesc.Width;
+			texSize.y = resDesc.Height;
 		}
 
-		//頂点バッファへのデータ転送
-		VertexPosUv* vertMap = nullptr;
-		result = vertBuff->Map(0, nullptr, (void**)&vertMap);
-		memcpy(vertMap, vertices, sizeof(vertices));
-		vertBuff->Unmap(0, nullptr);
+		float tex_left = texBase.x / resDesc.Width;
+		float tex_right = (texBase.x + texSize.x) / resDesc.Width;
+		float tex_top = texBase.y / resDesc.Height;
+		float tex_botton = (texBase.y + texSize.y) / resDesc.Height;
+
+		vertices[LB].uv = { tex_left,tex_botton };//左下
+		vertices[LT].uv = { tex_left,tex_top };//左上
+		vertices[RB].uv = { tex_right,tex_botton };//右下
+		vertices[RT].uv = { tex_right,tex_top };//右上
+	}
+
+	//頂点バッファへのデータ転送
+	VertexPosUv* vertMap = nullptr;
+	result = vertBuff->Map(0, nullptr, (void**)&vertMap);
+	memcpy(vertMap, vertices, sizeof(vertices));
+	vertBuff->Unmap(0, nullptr);
 }
 
 void Sprite::SetSize(float width, float height)
 {
-	this->width = width;
-	this->height = height;
+	size.x = width;
+	size.y = height;
+	TransferVertices();
+}
+
+void Sprite::SetPosition(XMFLOAT2 position)
+{
+	this->position = XMFLOAT3(position.x, position.y, 0.0f);
+
+	// 頂点バッファへのデータ転送
+	TransferVertices();
 }
 
 void Sprite::TextureRange(float tex_x, float tex_y, float tex_width, float tex_height)
 {
-	tex_x = tex_x;
-	tex_y = tex_y;
+	texBase.x = tex_x;
+	texBase.y = tex_y;
 
-	tex_width = tex_width;
-	tex_height = tex_height;
+	texSize.x = tex_width;
+	texSize.y = tex_height;
 
-	width = tex_width;
-	height = tex_height;
+	size.x = tex_width;
+	size.y = tex_height;
 
+}
+
+void Sprite::SetR(float r)
+{
+	rotation = r;
+	TransferVertices();
 }
 
 void Sprite::Common::InitializeGraphicsPipeline()

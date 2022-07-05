@@ -19,7 +19,7 @@ public:
 	void Update(const Vector3& p);
 	void Draw(DirectXCommon* dxCommon);
 
-	void SetPosition(const Vector3& position) { for (int i = 0, size = object.size(); i < size; ++i) { object[i]->SetPosition(Vector3(position.x, position.y, position.z)); } }
+	void SetPosition(const Vector3& position) { for (int i = 0; i < object.size(); ++i) { object[i]->SetPosition(Vector3(position.x, position.y, position.z)); } }
 	void SetLiveFlag(const bool& b) { for (auto& o : object) { o->SetLiveFlag(b); } }
 	void SetSpawnFlag(const bool& b) { spawn = b; }
 };

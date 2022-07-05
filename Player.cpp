@@ -33,7 +33,6 @@ void Player::Initialize(DirectXCommon* dxCommon, TextureManager* textureManager,
 	scale = Vector3(0.6f, 0.6f, 0.6f);
 	rotation = Vector3::Zero;
 	
-
 	//ƒJƒƒ‰ŠÖ˜A
 	distanceY = 1.0f;
 	distanceZ = 3.5f;
@@ -78,6 +77,7 @@ void Player::Update()
 	bodyObj->SetPosition(position + adjustment);
 	bodyObj->SetRotation(bodyRotation);
 	bodyObj->SetScale(scale);
+
 	if (liveFlag)
 	{
 		TPSCameraUpdate();//ƒJƒƒ‰‚Ì“®‚«
@@ -117,16 +117,16 @@ void Player::Move()
 	Vector3 direction = Vector3(target.x - eye.x, 0.0f, target.z - eye.z);
 	//³‹K‰»
 	direction.Normalize();
-	velocity = Vector3();
+	velocity = Vector3::Zero;
 	//‘€ì
-	if (input->PushKey(DIK_W) || input->PushKey(DIK_S))
+	if (input->KeyPress(DIK_W) || input->KeyPress(DIK_S))
 	{
-		if (input->PushKey(DIK_W))
+		if (input->KeyPress(DIK_W))
 		{
 			velocity += direction * 0.1f;
 			dirVel = direction * 0.1f;
 		}
-		if (input->PushKey(DIK_S))
+		if (input->KeyPress(DIK_S))
 		{
 			velocity -= direction * 0.1f;
 			dirVel = direction * 0.1f;

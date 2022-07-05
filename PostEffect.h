@@ -34,7 +34,7 @@ public:
     /// <summary>
     /// パイプライン生成
     /// </summary>
-    void CreateGraphicsPiepelineState();
+    void CreateGraphicsPipelineState();
     /// <summary>
     /// 描画
     /// </summary>
@@ -47,13 +47,13 @@ public:
 private:
     ComPtr<ID3D12Resource>texBuff[2];
     ComPtr<ID3D12Resource>depthBuff;
-    ComPtr<ID3D12Resource> cb;
+    ComPtr<ID3D12Resource>cb;
 
     ComPtr<ID3D12DescriptorHeap>descHeapSRV;
     ComPtr<ID3D12DescriptorHeap>descHeapRTV;
     ComPtr<ID3D12DescriptorHeap>descHeapDSV;
     
-    ComPtr<ID3D12PipelineState>piepelineState;
+    ComPtr<ID3D12PipelineState>pipelineState;
     ComPtr<ID3D12RootSignature>rootSignature;
     
     //画面クリアカラー

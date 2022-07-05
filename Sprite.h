@@ -50,17 +50,14 @@ public:	//静的メンバ関数
 	/// 静的メンバの初期化
 	/// </summary>
 	static void StaticInitialize(DirectXCommon* dxCommon, TextureManager* textureManager);
+
 	/// <summary>
-	/// 静的メンバの解放
+	/// グラフィックスパイプラインのセット
 	/// </summary>
-	static void StaticFinalize();
-/// <summary>
-/// グラフィックスパイプラインのセット
-/// </summary>
 	static void SetPiepelineState(ID3D12GraphicsCommandList* cmdList);
 
 protected:	//静的メンバ変数
-	static Common* common;
+	static std::unique_ptr<Common>common;
 
 public:
 	/// <summary>
@@ -74,49 +71,62 @@ public:
 	/// <param name="isFlipX"></param>
 	/// <param name="isFlipY"></param>
 	Sprite(UINT texNumber, XMFLOAT2 position, XMFLOAT2 size, XMFLOAT4 color, XMFLOAT2 anchorpoint, bool isFlipX, bool isFlipY);
+
 	/// <summary>
 	/// 初期化
 	/// </summary>
 	/// <param name="texNumber"></param>
 	void Initialize(UINT texNumber);
+
 	/// <summary>
 	/// 描画
 	/// </summary>
 	void Draw(ID3D12GraphicsCommandList* cmdList);
+
 	/// <summary>
 	/// 頂点バッファにデータ転送
 	/// </summary>
 	void TransferVertices();
+
 	/// <summary>
 	/// サイズ設定
 	/// </summary>
 	void SetSize(float width, float height);
+
+	/// <summary>
+	/// 座標の設定
+	/// </summary>
+	/// <param name="position">座標</param>
+	void SetPosition(XMFLOAT2 position);
+
 	/// <summary>
 	/// テクスチャの範囲指定
 	/// </summary>
 	/// <param name="anchorpoint"></param>
 	void TextureRange(float tex_x, float tex_y, float tex_width, float tex_height);
+
+	void SetR(float r);
+
+	XMFLOAT3 GetPosition() { return position; }
+
 public:
 	DirectXCommon* GetdxCommon() { return common->dxCommon; }
 	ComPtr<ID3D12PipelineState> GetPipielineState() { return common->pipelineState; }
 
 protected:	//メンバ変数
-	ComPtr<ID3D12Resource> vertBuff;//頂点バッファ
-	ComPtr<ID3D12Resource> constBuff;//定数バッファ
+	ComPtr<ID3D12Resource>vertBuff;//頂点バッファ
+	ComPtr<ID3D12Resource>constBuff;//定数バッファ
 	D3D12_VERTEX_BUFFER_VIEW vbView{};//頂点バッファビュー
 	float rotation = 0.0f;//Z軸回転
 	XMFLOAT3 position{};//座標
 	XMMATRIX matWorld{};//ワールド行列
-	XMFLOAT4 color = { 1,1,1,1 };//色
+	XMFLOAT4 color = { 1.0f,1.0f,1.0f,1.0f };//色
 	UINT texNumber = 0;//テクスチャ番号
-	XMFLOAT2 anchorpoint = { 0.5f,0.5f };//基準点
-	float width=100.0f;
-	float height=100.0f;
+	XMFLOAT2 anchorpoint = { 0.0f,0.0f };//基準点
+	XMFLOAT2 size = { 1.0f,1.0f };// スプライト幅、高さ
+	XMFLOAT2 texSize = { 1.0f,1.0f };//テクスチャ幅、高さ
+	XMFLOAT2 texBase = { 0.0f,0.0f };//テクスチャ左上座標
 	bool isFlipX = false;//左右反転
 	bool isFlipY = false;//上下反転
-	float tex_x = 0.0f;//テクスチャ左上　x座標
-	float tex_y = 0.0f;//テクスチャ左上　y座標
-	float tex_width = 100.0f;//テクスチャ横幅
-	float tex_height = 100.0f;//テクスチャ縦幅
 };
 

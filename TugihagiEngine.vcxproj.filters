@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="ゲームオブジェクト">
       <UniqueIdentifier>{3d6b51b6-8002-4153-963d-902db3ffb594}</UniqueIdentifier>
     </Filter>
@@ -14,18 +10,11 @@
     <Filter Include="ゲームオブジェクト\プレイヤー">
       <UniqueIdentifier>{78b347b1-343a-4c86-a7ef-ff5c1bbdc36a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="マップ">
-      <UniqueIdentifier>{c8848f61-2e18-46e2-aa29-79f5bef9de09}</UniqueIdentifier>
-    </Filter>
     <Filter Include="パーティクル">
       <UniqueIdentifier>{58dd2097-da81-495d-bbe7-2003a28ab91e}</UniqueIdentifier>
     </Filter>
     <Filter Include="シーン">
       <UniqueIdentifier>{6ac51312-2cc3-44f0-ae2a-9442356ab88b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="エンジン">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="ベクトル">
       <UniqueIdentifier>{4a1f6e0b-b5ec-4fa0-9a48-c4ac095ed7ff}</UniqueIdentifier>
@@ -33,49 +22,92 @@
     <Filter Include="ゲームオブジェクト\ポーズ">
       <UniqueIdentifier>{345ac660-9678-4324-8ab1-7355c184f729}</UniqueIdentifier>
     </Filter>
+    <Filter Include="シーン\シーン基底クラス">
+      <UniqueIdentifier>{7fbc58a2-064a-4fc8-a374-90b75634bdcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="シーン\シーン継承クラス">
+      <UniqueIdentifier>{91bcbb48-a105-43bc-8914-f45ed8f185ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="シーン\シーン管理クラス">
+      <UniqueIdentifier>{a9c126ee-f4e7-452e-a194-f6bed8b5b47f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームオブジェクト\オブジェクト基底クラス">
+      <UniqueIdentifier>{bbd4579f-c16b-4f45-bcf2-7abfa9e9b9e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームオブジェクト\背景用タンク">
+      <UniqueIdentifier>{0494dfe5-1679-4c1c-a874-bb898ddd41fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームオブジェクト\弾">
+      <UniqueIdentifier>{ef8d76cc-40f2-4f8f-b2e2-8dc8292addab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="マップ関連">
+      <UniqueIdentifier>{c8848f61-2e18-46e2-aa29-79f5bef9de09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="マップ関連\床">
+      <UniqueIdentifier>{c6cd9fe6-c6e4-4214-8d35-b7036e5f0bdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="マップ関連\壁">
+      <UniqueIdentifier>{2bdb7477-ce5f-47be-8690-a5cbe27e26c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="マップ関連\天井">
+      <UniqueIdentifier>{36029335-7a1d-4323-a5f0-83ba4d87c62a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="マップ関連\マップ">
+      <UniqueIdentifier>{6b4da4df-f18a-46a6-a310-c677573daec2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="エンジン関連">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="シェーダー">
+      <UniqueIdentifier>{e9765439-b194-4483-8fae-98c22f0c8a63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="シーン\シーン遷移演出クラス">
+      <UniqueIdentifier>{83f2d9dc-a886-49be-8acb-80cdce7ab9b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseGame.cpp">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClCompile>
     <ClCompile Include="DirectXGame.cpp">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClCompile>
     <ClCompile Include="PostEffect.cpp">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClCompile>
     <ClCompile Include="DirectXCommon.cpp">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClCompile>
     <ClCompile Include="Light.cpp">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClCompile>
     <ClCompile Include="Object3d.cpp">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClCompile>
     <ClCompile Include="WinApp.cpp">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>ゲームオブジェクト\エネミー</Filter>
@@ -93,25 +125,7 @@
       <Filter>ゲームオブジェクト\プレイヤー</Filter>
     </ClCompile>
     <ClCompile Include="Loader.cpp">
-      <Filter>エンジン</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseGameObject.cpp">
-      <Filter>ゲームオブジェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>ゲームオブジェクト</Filter>
-    </ClCompile>
-    <ClCompile Include="Ceiling.cpp">
-      <Filter>マップ</Filter>
-    </ClCompile>
-    <ClCompile Include="Floor.cpp">
-      <Filter>マップ</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>マップ</Filter>
-    </ClCompile>
-    <ClCompile Include="Wall.cpp">
-      <Filter>マップ</Filter>
+      <Filter>エンジン関連</Filter>
     </ClCompile>
     <ClCompile Include="Vector2.cpp">
       <Filter>ベクトル</Filter>
@@ -134,24 +148,6 @@
     <ClCompile Include="SmokeParticle.cpp">
       <Filter>パーティクル</Filter>
     </ClCompile>
-    <ClCompile Include="BaseScene.cpp">
-      <Filter>シーン</Filter>
-    </ClCompile>
-    <ClCompile Include="ClearScene.cpp">
-      <Filter>シーン</Filter>
-    </ClCompile>
-    <ClCompile Include="OverScene.cpp">
-      <Filter>シーン</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayScene.cpp">
-      <Filter>シーン</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>シーン</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>シーン</Filter>
-    </ClCompile>
     <ClCompile Include="PauseResume.cpp">
       <Filter>ゲームオブジェクト\ポーズ</Filter>
     </ClCompile>
@@ -161,20 +157,85 @@
     <ClCompile Include="PauseRestart.cpp">
       <Filter>ゲームオブジェクト\ポーズ</Filter>
     </ClCompile>
+    <ClCompile Include="BaseGameObject.cpp">
+      <Filter>ゲームオブジェクト\オブジェクト基底クラス</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseScene.cpp">
+      <Filter>シーン\シーン基底クラス</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearScene.cpp">
+      <Filter>シーン\シーン継承クラス</Filter>
+    </ClCompile>
+    <ClCompile Include="OverScene.cpp">
+      <Filter>シーン\シーン継承クラス</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>シーン\シーン継承クラス</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>シーン\シーン継承クラス</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>シーン\シーン管理クラス</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGroundObject.cpp">
+      <Filter>ゲームオブジェクト\背景用タンク</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>ゲームオブジェクト\弾</Filter>
+    </ClCompile>
+    <ClCompile Include="Floor.cpp">
+      <Filter>マップ関連\床</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>マップ関連\壁</Filter>
+    </ClCompile>
+    <ClCompile Include="Ceiling.cpp">
+      <Filter>マップ関連\天井</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>マップ関連\マップ</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeOpen.cpp">
+      <Filter>シーン\シーン遷移演出クラス</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeClose.cpp">
+      <Filter>シーン\シーン遷移演出クラス</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="BasicVertexShader.hlsl" />
-    <FxCompile Include="BasicPixelShader.hlsl" />
-    <FxCompile Include="SpriteVertexShader.hlsl" />
-    <FxCompile Include="SpritePixelShader.hlsl" />
-    <FxCompile Include="PostEffectTestPS.hlsl" />
-    <FxCompile Include="PostEffectTestVS.hlsl" />
-    <FxCompile Include="BasicGeometryShader.hlsl" />
+    <FxCompile Include="BasicGeometryShader.hlsl">
+      <Filter>シェーダー</Filter>
+    </FxCompile>
+    <FxCompile Include="BasicPixelShader.hlsl">
+      <Filter>シェーダー</Filter>
+    </FxCompile>
+    <FxCompile Include="BasicVertexShader.hlsl">
+      <Filter>シェーダー</Filter>
+    </FxCompile>
+    <FxCompile Include="PostEffectTestPS.hlsl">
+      <Filter>シェーダー</Filter>
+    </FxCompile>
+    <FxCompile Include="PostEffectTestVS.hlsl">
+      <Filter>シェーダー</Filter>
+    </FxCompile>
+    <FxCompile Include="SpritePixelShader.hlsl">
+      <Filter>シェーダー</Filter>
+    </FxCompile>
+    <FxCompile Include="SpriteVertexShader.hlsl">
+      <Filter>シェーダー</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="BasicShaderHeader.hlsli" />
-    <None Include="PostEffectTest.hlsli" />
-    <None Include="SpriteShaderHeader.hlsli" />
+    <None Include="BasicShaderHeader.hlsli">
+      <Filter>シェーダー</Filter>
+    </None>
+    <None Include="PostEffectTest.hlsli">
+      <Filter>シェーダー</Filter>
+    </None>
+    <None Include="SpriteShaderHeader.hlsli">
+      <Filter>シェーダー</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnemyBullet.h">
@@ -191,24 +252,6 @@
     </ClInclude>
     <ClInclude Include="Laser.h">
       <Filter>ゲームオブジェクト\プレイヤー</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>ゲームオブジェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseGameObject.h">
-      <Filter>ゲームオブジェクト</Filter>
-    </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>マップ</Filter>
-    </ClInclude>
-    <ClInclude Include="Ceiling.h">
-      <Filter>マップ</Filter>
-    </ClInclude>
-    <ClInclude Include="Floor.h">
-      <Filter>マップ</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>マップ</Filter>
     </ClInclude>
     <ClInclude Include="Vector3.h">
       <Filter>ベクトル</Filter>
@@ -231,68 +274,50 @@
     <ClInclude Include="ParticleManager.h">
       <Filter>パーティクル</Filter>
     </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>シーン</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseScene.h">
-      <Filter>シーン</Filter>
-    </ClInclude>
-    <ClInclude Include="ClearScene.h">
-      <Filter>シーン</Filter>
-    </ClInclude>
-    <ClInclude Include="OverScene.h">
-      <Filter>シーン</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayScene.h">
-      <Filter>シーン</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>シーン</Filter>
-    </ClInclude>
     <ClInclude Include="WinApp.h">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClInclude>
     <ClInclude Include="BaseGame.h">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClInclude>
     <ClInclude Include="Collision.h">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClInclude>
     <ClInclude Include="DirectXCommon.h">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClInclude>
     <ClInclude Include="DirectXGame.h">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClInclude>
     <ClInclude Include="Light.h">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClInclude>
     <ClInclude Include="Loader.h">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClInclude>
     <ClInclude Include="Object3d.h">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClInclude>
     <ClInclude Include="PostEffect.h">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClInclude>
     <ClInclude Include="SoundManager.h">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClInclude>
     <ClInclude Include="TextureManager.h">
-      <Filter>エンジン</Filter>
+      <Filter>エンジン関連</Filter>
     </ClInclude>
     <ClInclude Include="PauseResume.h">
       <Filter>ゲームオブジェクト\ポーズ</Filter>
@@ -302,6 +327,51 @@
     </ClInclude>
     <ClInclude Include="PauseRestart.h">
       <Filter>ゲームオブジェクト\ポーズ</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseGameObject.h">
+      <Filter>ゲームオブジェクト\オブジェクト基底クラス</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseScene.h">
+      <Filter>シーン\シーン基底クラス</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearScene.h">
+      <Filter>シーン\シーン継承クラス</Filter>
+    </ClInclude>
+    <ClInclude Include="OverScene.h">
+      <Filter>シーン\シーン継承クラス</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScene.h">
+      <Filter>シーン\シーン継承クラス</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>シーン\シーン継承クラス</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>シーン\シーン管理クラス</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGroundObject.h">
+      <Filter>ゲームオブジェクト\背景用タンク</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>ゲームオブジェクト\弾</Filter>
+    </ClInclude>
+    <ClInclude Include="Floor.h">
+      <Filter>マップ関連\床</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>マップ関連\壁</Filter>
+    </ClInclude>
+    <ClInclude Include="Ceiling.h">
+      <Filter>マップ関連\天井</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>マップ関連\マップ</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeOpen.h">
+      <Filter>シーン\シーン遷移演出クラス</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeClose.h">
+      <Filter>シーン\シーン遷移演出クラス</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

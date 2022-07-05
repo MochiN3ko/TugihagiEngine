@@ -35,7 +35,6 @@ public:
 	EnemyBullet* GetNEnemyBullet() { return eBullet.get(); }
 
 	//Setter
-	static void StaticLoad();
 	static void SetPlayer(Player* p) { player = p; }
 	static void SetNormalBullet(const std::vector<Bullet*>b){ pBullet = b; }
 };

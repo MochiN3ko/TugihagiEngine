@@ -10,7 +10,7 @@ class OverScene :
 private:
 
     std::unique_ptr<Object3d>over;
-    std::unique_ptr<Object3d>enter;
+    std::unique_ptr<Object3d>click;
 
     //オブジェクト用
     Vector3 position = Vector3::Zero;//座標

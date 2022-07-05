@@ -49,7 +49,7 @@ void HitParticle::Update(const Vector3& p)
 			}
 			else
 			{
-				object[i]->SetColor(Vector3(0.0f, 0.0f, object[i]->GetTime() / 5.0f));
+				object[i]->SetColor(Vector3(0.13f, 0.13f, object[i]->GetTime() / 5.0f));
 			}
 			object[i]->SetVelocity(object[i]->GetVelocity() * 0.8f);//‘¬“x‚ğŒ¸‘¬
 		}

@@ -96,7 +96,7 @@ int Map::GetFloorMax()
 {
 	std::vector<Vector3> result = floor[0];
 	int a = floor[0].size();
-	for (int i = 0; i < MAP_COUNT; i++)
+	for (int i = 0; i < MAP_COUNT; ++i)
 	{
 		//æ“ª‚©‚Â¶‚«‚Ä‚¢‚é
 		if (result.size() < floor[i].size())
@@ -112,7 +112,7 @@ int Map::GetCeilingMax()
 {
 	std::vector<Vector3> result = ceiling[0];
 	int a = ceiling[0].size();
-	for (int i = 0; i < MAP_COUNT; i++)
+	for (int i = 0; i < MAP_COUNT; ++i)
 	{
 		//æ“ª‚©‚Â¶‚«‚Ä‚¢‚é
 		if (result.size() < ceiling[i].size())
@@ -128,7 +128,7 @@ int Map::GetWallMax()
 {
 	std::vector<Vector3> result = wall[0];
 	int a = wall[0].size();
-	for (int i = 0; i < MAP_COUNT; i++)
+	for (int i = 0; i < MAP_COUNT; ++i)
 	{
 		//æ“ª‚©‚Â¶‚«‚Ä‚¢‚é
 		if (result.size() < wall[i].size())
@@ -144,7 +144,7 @@ int Map::GetEnemyMax()
 {
 	std::vector<Vector3> result = normalEnemies[0];
 	int a = normalEnemies[0].size();
-	for (int i = 0; i < MAP_COUNT; i++)
+	for (int i = 0; i < MAP_COUNT; ++i)
 	{
 		//æ“ª‚©‚Â¶‚«‚Ä‚¢‚é
 		if (result.size() < normalEnemies[i].size())

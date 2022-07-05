@@ -37,10 +37,7 @@ public:
 		/// </summary>
 		/// <param name="dxCommon">DirectXŠî”Õ</param>
 		void InitializeGraphicsPipeline(DirectXCommon*dxCommon);
-		/// <summary>
-		/// ƒJƒƒ‰‰Šú‰»
-		/// </summary>
-		void InitializeCamera();
+		
 	private:
 		//DirectX12Šî”Õ
 		DirectXCommon* dxCommon = nullptr;

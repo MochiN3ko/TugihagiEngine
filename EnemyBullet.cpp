@@ -24,7 +24,7 @@ void EnemyBullet::Initialize(DirectXCommon* dxCommon, TextureManager* textureMan
 	for (int i = 0; i < size_; ++i)
 	{
 		object[i]->Initialize(dxCommon, textureManager, texNum);//初期化
-		object[i]->GetObj()->SetColor(Vector3(0.0f, 0.0f, 0.7f));
+		object[i]->GetObj()->SetColor(Vector3(0.13f, 0.13f, 0.7f));
 		object[i]->SetReverseCount(1);//反射回数設定
 	}
 	a = 0;//発射レート用のカウント

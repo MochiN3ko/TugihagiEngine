@@ -181,10 +181,7 @@ void Object3d::Common::InitializeGraphicsPipeline(DirectXCommon* dxCommon)
 //	assert(SUCCEEDED(result));
 //
 //}
-void Object3d::Common::InitializeCamera()
-{
-	
-}
+
 void Object3d::StaticInitialize(DirectXCommon* dxCommon,Camera* camera)
 {
 	common = new Common();
@@ -192,8 +189,6 @@ void Object3d::StaticInitialize(DirectXCommon* dxCommon,Camera* camera)
 	common->dxCommon = dxCommon;
 	//グラフィクスパイプラインの初期化
 	common->InitializeGraphicsPipeline(dxCommon);
-	//カメラの初期化
-	common->InitializeCamera();
 	
 	common->camera = camera;
 }

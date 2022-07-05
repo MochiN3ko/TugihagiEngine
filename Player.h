@@ -71,7 +71,7 @@ public:
 	const Vector3& GetPlayerEye() { return eye; }
 	const Vector3& GetPlayerTarget() { return target; }
 	NormalBullet* GetNormalBullet() { return nBullet.get(); }
-	int GetHp() { return hp; }
+	const int& GetHp() { return hp; }
 	//Setter
 	static void SetInput(Input* i) { input = i; }
 	void SetInputFlag(const bool& isInput) { this->isInput = isInput; }

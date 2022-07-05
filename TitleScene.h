@@ -2,6 +2,7 @@
 #include "BaseScene.h"
 #include"SceneManager.h"
 #include"Object3d.h"
+#include"BackGroundObject.h"
 #include<vector>
 
 //タイトルシーン
@@ -9,15 +10,14 @@ class TitleScene :
     public BaseScene
 {
 private:
-
     std::unique_ptr<Object3d>title;
-    std::unique_ptr<Object3d>enter;
+    std::unique_ptr<Object3d>click;
 
-    std::unique_ptr<Object3d>turret;
-    std::unique_ptr<Object3d>body;
+    std::unique_ptr<BackGroundObject>leftBgTank;
+    std::unique_ptr<BackGroundObject>rightBgTank;
 
-    std::unique_ptr<Object3d>turret2;
-    std::unique_ptr<Object3d>body2;
+    std::unique_ptr<ChangeOpen>open;
+    std::unique_ptr<ChangeClose>close;
 
     //オブジェクト用
     Vector3 position = Vector3::Zero;//座標

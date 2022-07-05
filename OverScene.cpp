@@ -4,7 +4,7 @@ OverScene::OverScene(SceneManager* sceneManager)
 	:BaseScene(sceneManager)
 {
 	over = std::make_unique<Object3d>();
-	enter = std::make_unique<Object3d>();
+	click = std::make_unique<Object3d>();
 }
 
 OverScene::~OverScene()
@@ -19,8 +19,8 @@ void OverScene::Initialize(DirectXCommon* dxCommon, TextureManager* textureManag
 	over->Initialize(loader->GetModel(Loader::ModelIndex::OVER));
 	over->SetColor(Vector3(0.8f, 0.15f, 0.15f));
 
-	enter->Initialize(loader->GetModel(Loader::ModelIndex::ENTER));
-	enter->SetColor(Vector3(0.8f, 0.15f, 0.15f));
+	click->Initialize(loader->GetModel(Loader::ModelIndex::LEFTCLICK));
+	click->SetColor(Vector3(0.8f, 0.15f, 0.15f));
 
 	position = Vector3(0.0f, -7.0f, 50.0f);
 	scale = Vector3(10.0f, 10.0f, 10.0f);
@@ -48,12 +48,12 @@ void OverScene::Update()
 	over->SetScale(scale);
 	over->Update();
 
-	enter->SetPosition(Vector3(0.0f, -15.0f, 30.0f));
-	enter->SetRotation(Vector3::Zero);
-	enter->SetScale(Vector3(5.0f, 5.0f, 5.0f));
-	enter->Update();
+	click->SetPosition(Vector3(0.0f, -15.0f, 30.0f));
+	click->SetRotation(Vector3::Zero);
+	click->SetScale(Vector3(5.0f, 5.0f, 5.0f));
+	click->Update();
 
-	if (input->TriggerKey(DIK_RETURN))
+	if (input->MouseButtonTrigger(0))
 	{
 		//ŽŸ‚ÌƒV[ƒ“‚Ö
 		sceneManager_->SetNextScene(new TitleScene(sceneManager_));
@@ -63,5 +63,5 @@ void OverScene::Update()
 void OverScene::Draw(DirectXCommon* dxCommon)
 {
 	over->Draw(dxCommon->GetCommandList());
-	enter->Draw(dxCommon->GetCommandList());
+	click->Draw(dxCommon->GetCommandList());
 }

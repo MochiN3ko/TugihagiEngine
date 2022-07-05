@@ -2,7 +2,7 @@
 
 #pragma comment(lib,"winmm.lib")
 
-std::unique_ptr<Loader> BaseGame::loader;
+std::unique_ptr<Loader>BaseGame::loader;
 
 void BaseGame::Run()
 {
@@ -80,7 +80,6 @@ void BaseGame::Update()
 
 void BaseGame::Finalize()
 {
-	Sprite::StaticFinalize();
 	Object3d::StaticFinalize();
 }
 

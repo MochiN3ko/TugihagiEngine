@@ -15,6 +15,7 @@ public:
         LASER,
         WALL,
         CUBE,
+        BGTANK,
         TANKTANK,
         TITLE,
         CLEAR,
@@ -23,12 +24,13 @@ public:
         RESUME,
         RESTART,
         ENTER,
+        LEFTCLICK,
     };
 
 private:
 
     std::vector<std::unique_ptr<Model>> model;
-    TextureManager* textureManager;
+    TextureManager* textureManager = nullptr;
 
     void AddModel(const ModelIndex& m, std::string filename);
 

@@ -19,8 +19,11 @@ void DirectXGame::Initialize()
 	sceneManager = std::make_unique<SceneManager>();
 	sceneManager->Initialize(dxCommon.get(), textureManager.get(), input.get(), camera.get());
 
-	sprite = new Sprite(6, Vector2(0, 0), Vector2(64, 64), {0,0,0,0}, Vector2(0, 0),false,false);
+	sprite = new Sprite(3, Vector2(0, 0), Vector2(1, 1), {1,0,0,0}, Vector2(0, 0),false,false);
 	sprite->Initialize(6);
+	sprite->SetSize(0.5, 0.5);
+	sprite->SetPosition({ 0,0 });
+	sprite->SetR(90);
 
 	//カメラのポジションとアングル
 	camera->SetTarget(XMFLOAT3(0.0f, 0.0f, 0.0f));//注視点
@@ -34,6 +37,10 @@ void DirectXGame::Update()
 
 	sceneManager->Update();
 
+	float a = sprite->GetPosition().x;
+	a++;
+	sprite->SetPosition({ a,0 });
+
 }
 
 void DirectXGame::Draw()
@@ -44,7 +51,7 @@ void DirectXGame::Draw()
 	sceneManager->Draw(dxCommon.get());
 
 	Sprite::SetPiepelineState(dxCommon->GetCommandList());
-	
+
 	postEffect->PostDrawScene(dxCommon->GetCommandList());
 
 #pragma region postEffect

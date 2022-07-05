@@ -144,8 +144,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackGroundObject.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Ceiling.cpp" />
+    <ClCompile Include="ChangeClose.cpp" />
+    <ClCompile Include="ChangeOpen.cpp" />
     <ClCompile Include="ClearScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBullet.cpp" />
@@ -273,8 +276,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackGroundObject.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Ceiling.h" />
+    <ClInclude Include="ChangeClose.h" />
+    <ClInclude Include="ChangeOpen.h" />
     <ClInclude Include="ClearScene.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBullet.h" />

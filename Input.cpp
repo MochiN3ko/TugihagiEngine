@@ -1,37 +1,42 @@
 #include "Input.h"
 #include <iostream>
 
-DIMOUSESTATE Input::currentMouse;
-DIMOUSESTATE Input::prevMouse;
-IDirectInputDevice8* Input::devmouse = nullptr;
+IDirectInput8* Input::dinput = nullptr;
+IDirectInputDevice8* Input::devKeyboard = nullptr;
+IDirectInputDevice8* Input::devMouse = nullptr;
+BYTE Input::currentKey[256] = {};
+BYTE Input::previousKey[256] = {};
+DIMOUSESTATE Input::currentMouse = {};
+DIMOUSESTATE Input::previousMouse = {};
+XINPUT_STATE Input::currentPadState = {};
+XINPUT_STATE Input::previousPadState = {};
 
 Input::Input()
 {
 
 }
+
 Input::~Input()
 {
 
 }
-void Input::Initialize(HWND hwnd)
+
+void Input::Initialize(const HWND& hwnd)
 {
-	HRESULT result;
 	//DirectInput オブジェクトの生成
-	IDirectInput8* dinput = nullptr;
-	HINSTANCE hInstance = GetModuleHandle(nullptr);
-	result = DirectInput8Create(hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&dinput, nullptr);
+	DirectInput8Create(GetModuleHandle(nullptr), DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&dinput, nullptr);
 	
-	result = dinput->CreateDevice(GUID_SysKeyboard, &devkeyboard, NULL);
+	//キーボードデバイスの生成
+	dinput->CreateDevice(GUID_SysKeyboard, &devKeyboard, NULL);
 	//入力データ形式のセット
-	result = devkeyboard->SetDataFormat(&c_dfDIKeyboard); // 標準形式
+	devKeyboard->SetDataFormat(&c_dfDIKeyboard); // 標準形式
 	//排他制御レベルのセット
-	result = devkeyboard->SetCooperativeLevel(
-		hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
+	devKeyboard->SetCooperativeLevel(hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
 
 	//マウスデバイスの生成
-	result = dinput->CreateDevice(GUID_SysMouse, &devmouse, NULL);
-	result = devmouse->SetDataFormat(&c_dfDIMouse);
-	result = devmouse->SetCooperativeLevel(hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
+	dinput->CreateDevice(GUID_SysMouse, &devMouse, NULL);
+	devMouse->SetDataFormat(&c_dfDIMouse);
+	devMouse->SetCooperativeLevel(hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
 
 	//ゲームパッドの初期化
 	ZeroMemory(&currentPadState, sizeof(XINPUT_STATE));
@@ -40,22 +45,21 @@ void Input::Initialize(HWND hwnd)
 
 void Input::Update()
 {
-	HRESULT result;
 	//キーボード情報の取得開始
-	result = devkeyboard->Acquire();
+	devKeyboard->Acquire();
 
 	//前回の入力情報をコピー
-	for (int i = 0; i < 256; i++)
+	for (int i = 0; i < 256; ++i)
 	{
-		key2[i] = key[i];
+		previousKey[i] = currentKey[i];
 	}
 
-	result = devkeyboard->GetDeviceState(sizeof(key), key);
+	devKeyboard->GetDeviceState(sizeof(currentKey), currentKey);
 
 	//マウス
-	devmouse->Acquire();
-	memcpy(&prevMouse, &currentMouse, sizeof(currentMouse));
-	devmouse->GetDeviceState(sizeof(currentMouse), &currentMouse);
+	devMouse->Acquire();
+	memcpy(&previousMouse, &currentMouse, sizeof(currentMouse));
+	devMouse->GetDeviceState(sizeof(currentMouse), &currentMouse);
 
 	//パッドの入力情報の更新
 	previousPadState = currentPadState;
@@ -64,31 +68,29 @@ void Input::Update()
 
 void Input::Finalize()
 {
-	devmouse->Release();
+	dinput->Release();
+	devKeyboard->Release();
+	devMouse->Release();
 }
 
-bool Input::PushKey(const int& keyNum)
+bool Input::KeyPress(const int& keyNum)
 {
-	if (keyNum < 0x00)return false;
-	if (keyNum > 0xff)return false;
-
-	if (key[keyNum])
-	{
-		return true;
-	}
-	return false;
+	return (currentKey[keyNum]);
 }
 
-bool Input::TriggerKey(const int& keyNum)
+bool Input::KeyTrigger(const int& keyNum)
 {
-	if (keyNum < 0x00)return false;
-	if (keyNum > 0xff)return false;
-	//前回押されていない、かつ今押されている
-	if (!key2[keyNum]&&key[keyNum])
-	{
-		return true;
-	}
-	return false;
+	return (currentKey[keyNum] && !previousKey[keyNum]);
+}
+
+bool Input::KeyHold(const int& keyNum)
+{
+	return (currentKey[keyNum] && previousKey[keyNum]);
+}
+
+bool Input::KeyRelease(const int& keyNum)
+{
+	return (!currentKey[keyNum] && !previousKey[keyNum]);
 }
 
 bool Input::MouseButtonPress(const int& keyNum)
@@ -98,17 +100,17 @@ bool Input::MouseButtonPress(const int& keyNum)
 
 bool Input::MouseButtonTrigger(const int& keyNum)
 {
-	return (currentMouse.rgbButtons[keyNum] && !prevMouse.rgbButtons[keyNum]);
+	return (currentMouse.rgbButtons[keyNum] && !previousMouse.rgbButtons[keyNum]);
 }
 
 bool Input::MouseButtonHold(const int& keyNum)
 {
-	return (currentMouse.rgbButtons[keyNum] && prevMouse.rgbButtons[keyNum]);
+	return (currentMouse.rgbButtons[keyNum] && previousMouse.rgbButtons[keyNum]);
 }
 
 bool Input::MouseButtonRelease(const int& keyNum)
 {
-	return (!currentMouse.rgbButtons[keyNum] && prevMouse.rgbButtons[keyNum]);
+	return (!currentMouse.rgbButtons[keyNum] && previousMouse.rgbButtons[keyNum]);
 }
 
 int Input::MouseXMove()
@@ -128,12 +130,17 @@ int Input::MouseWheelMove()
 
 bool Input::PadButtonPress(const int& keyNum)
 {
-	return currentPadState.Gamepad.wButtons & keyNum;
+	return (currentPadState.Gamepad.wButtons & keyNum);
 }
 
 bool Input::PadButtonTrigger(const int& keyNum)
 {
 	return (currentPadState.Gamepad.wButtons & keyNum) && !(previousPadState.Gamepad.wButtons & keyNum);
+}
+
+bool Input::PadButtonHold(const int& keyNum)
+{
+	return (currentPadState.Gamepad.wButtons & keyNum) && (previousPadState.Gamepad.wButtons & keyNum);
 }
 
 bool Input::PadButtonRelease(const int& keyNum)

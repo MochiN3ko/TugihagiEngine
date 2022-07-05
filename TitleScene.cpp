@@ -4,13 +4,12 @@ TitleScene::TitleScene(SceneManager* sceneManager)
 	:BaseScene(sceneManager)
 {
 	title = std::make_unique<Object3d>();
-	enter = std::make_unique<Object3d>();
+	click = std::make_unique<Object3d>();
+	leftBgTank = std::make_unique<BackGroundObject>();
+	rightBgTank = std::make_unique<BackGroundObject>();
 
-	turret = std::make_unique<Object3d>();
-	body = std::make_unique<Object3d>();
-
-	turret2 = std::make_unique<Object3d>();
-	body2 = std::make_unique<Object3d>();
+	open = std::make_unique<ChangeOpen>();
+	close = std::make_unique<ChangeClose>();
 }
 
 TitleScene::~TitleScene()
@@ -26,21 +25,21 @@ void TitleScene::Initialize(DirectXCommon* dxCommon, TextureManager* textureMana
 	title->Initialize(loader->GetModel(Loader::ModelIndex::TANKTANK));
 	title->SetColor(Vector3(0.15f, 1.0f, 0.15f));
 
-	//エンターオブジェクト
-	enter->Initialize(loader->GetModel(Loader::ModelIndex::ENTER));
-	enter->SetColor(Vector3(0.15f, 1.0f, 0.15f));
+	//クリックオブジェクト
+	click->Initialize(loader->GetModel(Loader::ModelIndex::LEFTCLICK));
+	click->SetColor(Vector3(0.15f, 1.0f, 0.15f));
 
-	//タレットオブジェクト
-	turret->Initialize(loader->GetModel(Loader::ModelIndex::TURRET));
-	turret->SetColor(Vector3(0.0f, 0.0f, 0.0f));
-	turret2->Initialize(loader->GetModel(Loader::ModelIndex::TURRET));
-	turret2->SetColor(Vector3(0.0f, 0.0f, 0.0f));
+	leftBgTank->Initialize(dxCommon, textureManager, 3);
+	leftBgTank->SetPosition(Vector3(-35.0f, -19.0f, 40.0f));
+	leftBgTank->SetVelocity(Vector3::Zero);
 
-	//ボディオブジェクト
-	body->Initialize(loader->GetModel(Loader::ModelIndex::BODY));
-	body->SetColor(Vector3(0.0f, 0.0f, 0.0f));
-	body2->Initialize(loader->GetModel(Loader::ModelIndex::BODY));
-	body2->SetColor(Vector3(0.0f, 0.0f, 0.0f));
+	rightBgTank->Initialize(dxCommon, textureManager, 3);
+	rightBgTank->SetPosition(Vector3(35.0f, -19.0f, 40.0f));
+	rightBgTank->SetRotation(Vector3::Zero);
+	rightBgTank->SetVelocity(Vector3::Zero);
+
+	open->Initialize(dxCommon, textureManager, 3);
+	close->Initialize(dxCommon, textureManager, 3);
 
 	position = Vector3(0.0f, -5.0f, 30.0f);
 	scale = Vector3(10.0f, 10.0f, 10.0f);
@@ -70,45 +69,31 @@ void TitleScene::Update()
 	title->SetScale(scale);
 	title->Update();
 
-	enter->SetPosition(Vector3(0.0f, -15.0f, 30.0f));
-	enter->SetRotation(Vector3::Zero);
-	enter->SetScale(Vector3(5.0f,5.0f,5.0f));
-	enter->Update();
+	click->SetPosition(Vector3(0.0f, -15.0f, 30.0f));
+	click->SetRotation(Vector3::Zero);
+	click->SetScale(Vector3(5.0f,5.0f,5.0f));
+	click->Update();
 
-	turret->SetPosition(Vector3(35.0f, -18.0f, 40.0f));
-	turret->SetRotation(Vector3(0.0f, 0.0f, 0.0f));
-	turret->SetScale(Vector3(5.0f, 5.0f, 0.0f));
-	turret->Update();
+	leftBgTank->Update();
+	rightBgTank->Update();
 
-	body->SetPosition(Vector3(35.0f, -18.0f, 40.0f));
-	body->SetRotation(Vector3(0.0f,0.0f,0.0f));
-	body->SetScale(Vector3(5.0f, 5.0f, 0.0f));
-	body->Update();
+	open->Update();
 
-	turret2->SetPosition(Vector3(-35.0f, -18.0f, 40.0f));
-	turret2->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
-	turret2->SetScale(Vector3(5.0f, 5.0f, 0.0f));
-	turret2->Update();
-
-	body2->SetPosition(Vector3(-35.0f, -18.0f, 40.0f));
-	body2->SetRotation(Vector3(0.0f, 180.0f, 0.0f));
-	body2->SetScale(Vector3(5.0f, 5.0f, 0.0f));
-	body2->Update();
-
-	if (input->TriggerKey(DIK_RETURN))
+	/*if (input->MouseButtonTrigger(0))
 	{
 		sceneManager_->SetNextScene(new PlayScene(sceneManager_));
-	}
+	}*/
 }
 
 void TitleScene::Draw(DirectXCommon* dxCommon)
 {
 	title->Draw(dxCommon->GetCommandList());
-	enter->Draw(dxCommon->GetCommandList());
 
-	turret->Draw(dxCommon->GetCommandList());
-	body->Draw(dxCommon->GetCommandList());
+	click->Draw(dxCommon->GetCommandList());
 
-	turret2->Draw(dxCommon->GetCommandList());
-	body2->Draw(dxCommon->GetCommandList());
+	leftBgTank->Draw(dxCommon);
+
+	rightBgTank->Draw(dxCommon);
+
+	open->Draw(dxCommon);
 }

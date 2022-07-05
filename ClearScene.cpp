@@ -4,7 +4,7 @@ ClearScene::ClearScene(SceneManager* sceneManager)
 	:BaseScene(sceneManager)
 {
 	clear = std::make_unique<Object3d>();
-	enter = std::make_unique<Object3d>();
+	click = std::make_unique<Object3d>();
 }
 
 ClearScene::~ClearScene()
@@ -19,8 +19,8 @@ void ClearScene::Initialize(DirectXCommon* dxCommon, TextureManager* textureMana
 	clear->Initialize(loader->GetModel(Loader::ModelIndex::CLEAR));
 	clear->SetColor(Vector3(1.0f, 0.84f, 0.0f));
 
-	enter->Initialize(loader->GetModel(Loader::ModelIndex::ENTER));
-	enter->SetColor(Vector3(1.0f, 0.84f, 0.0f));
+	click->Initialize(loader->GetModel(Loader::ModelIndex::LEFTCLICK));
+	click->SetColor(Vector3(1.0f, 0.84f, 0.0f));
 
 	position = Vector3(0.0f, -7.0f, 50.0f);
 	scale = Vector3(30.0f, 30.0f, 30.0f);
@@ -54,12 +54,12 @@ void ClearScene::Update()
 	clear->SetScale(scale);
 	clear->Update();
 
-	enter->SetPosition(Vector3(0, -15, 30));
-	enter->SetRotation(Vector3::Zero);
-	enter->SetScale(Vector3(5, 5, 5));
-	enter->Update();
+	click->SetPosition(Vector3(0, -15, 30));
+	click->SetRotation(Vector3::Zero);
+	click->SetScale(Vector3(5, 5, 5));
+	click->Update();
 
-	if (input->TriggerKey(DIK_RETURN))
+	if (input->MouseButtonTrigger(0))
 	{
 		//ŽŸ‚ÌƒV[ƒ“‚Ö
 		sceneManager_->SetNextScene(new TitleScene(sceneManager_));
@@ -69,6 +69,6 @@ void ClearScene::Update()
 void ClearScene::Draw(DirectXCommon* dxCommon)
 {
 	clear->Draw(dxCommon->GetCommandList());
-	enter->Draw(dxCommon->GetCommandList());
+	click->Draw(dxCommon->GetCommandList());
 
 }
